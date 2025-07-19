@@ -1,0 +1,116 @@
+/* Estilos para el layout principal */
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Menú lateral fijo */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #1e2a3a;
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  padding: 20px 0;
+}
+
+/* Contenedor principal con scroll independiente */
+.main-content {
+  flex: 1;
+  margin-left: 250px; /* Mismo ancho que el sidebar */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Área de formulario con scroll */
+.form-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* Pestañas inferiores siempre visibles */
+.tabs-container {
+  background-color: #f0f2f5;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.tab {
+  padding: 10px 15px;
+  margin-right: 5px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #8fe3ff;
+}
+
+/* Ocultar el botón Clínica */
+.btn-clinic, 
+button[class*="clinic"], 
+button:contains("Clínica"),
+.action-buttons button:nth-child(3) {
+  display: none !important;
+}
+
+
+/* Eliminar la siguiente línea */
+/* Estilos para el Odontograma */
+.grid-cols-16 {
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+}
+
+/* Estilos para los dientes */
+.tooth {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooth:hover {
+  opacity: 0.8;
+}
+
+.tooth-status {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.tooth-status.good {
+  background-color: #3b82f6; /* blue-500 */
+}
+
+.tooth-status.bad {
+  background-color: #ef4444; /* red-500 */
+}
+
+/* Estilos para el plan de tratamiento */
+.treatment-plan-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.treatment-plan-table th,
+.treatment-plan-table td {
+  border: 1px solid #374151; /* gray-700 */
+  padding: 8px 12px;
+}
+
+.treatment-plan-table th {
+  background-color: #1f2937; /* gray-800 */
+  text-align: left;
+}

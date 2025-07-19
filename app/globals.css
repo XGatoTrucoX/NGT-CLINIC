@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos personalizados para react-phone-input-2 en dark mode */
+.custom-phone-dropdown-dark {
+  background: #232C3B !important;
+  color: #fff !important;
+}
+.custom-phone-dropdown-dark .search-box {
+  background: #232C3B !important;
+  color: #fff !important;
+  border: 1px solid #2E3A4B !important;
+}
+.custom-phone-dropdown-dark .country-list {
+  background: #232C3B !important;
+  color: #fff !important;
+  scrollbar-width: thin;
+  scrollbar-color: #2E3A4B #232C3B;
+}
+.custom-phone-dropdown-dark .country-list::-webkit-scrollbar {
+  width: 8px;
+  background: #232C3B;
+}
+.custom-phone-dropdown-dark .country-list::-webkit-scrollbar-thumb {
+  background: #2E3A4B;
+  border-radius: 6px;
+}
+.custom-phone-dropdown-dark .country-list::-webkit-scrollbar-track {
+  background: #232C3B;
+}
+.custom-phone-dropdown-dark .country:hover,
+.custom-phone-dropdown-dark .country.highlight {
+  background: #2E3A4B !important;
+  color: #fff !important;
+}
+.custom-phone-dropdown-dark .country.selected {
+  background: #263447 !important;
+  color: #fff !important;
+}
+
+/* Scrollbar oscuro para el menú de países en dark mode - máxima especificidad */
+.custom-phone-dropdown-dark,
+.custom-phone-dropdown-dark * {
+  scrollbar-width: thin !important;
+  scrollbar-color: #2E3A4B #232C3B !important;
+}
+.custom-phone-dropdown-dark ::-webkit-scrollbar,
+.custom-phone-dropdown-dark .country-list::-webkit-scrollbar {
+  width: 8px !important;
+  background: #232C3B !important;
+}
+.custom-phone-dropdown-dark ::-webkit-scrollbar-thumb,
+.custom-phone-dropdown-dark .country-list::-webkit-scrollbar-thumb {
+  background: #2E3A4B !important;
+  border-radius: 6px !important;
+}
+.custom-phone-dropdown-dark ::-webkit-scrollbar-track,
+.custom-phone-dropdown-dark .country-list::-webkit-scrollbar-track {
+  background: #232C3B !important;
+} 

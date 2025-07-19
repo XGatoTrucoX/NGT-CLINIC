@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NGT Clinic</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Menú lateral fijo -->
+    <div class="sidebar">
+      <div class="menu-item">Pacientes</div>
+      <div class="menu-item">Citas</div>
+      <div class="menu-item">Laboratorio</div>
+      <div class="menu-item">Gastos</div>
+      <div class="menu-item">Estadísticas</div>
+      <div class="menu-item">Configuración</div>
+    </div>
+    
+    <!-- Contenido principal con scroll -->
+    <div class="main-content">
+      <!-- Área de información del paciente -->
+      <div class="patient-info">
+        <!-- Información del paciente -->
+        <div class="patient-badges">
+          <span class="badge">Hace 368 días</span>
+          <span class="badge">Bs. 3297</span>
+          <span class="badge">Cardiopata</span>
+        </div>
+        
+        <!-- Botones de acción (sin el botón Clínica) -->
+        <div class="action-buttons">
+          <button class="btn-call">Llamada</button>
+          <button class="btn-whatsapp">WhatsApp</button>
+          <!-- El botón Clínica ha sido completamente eliminado -->
+        </div>
+      </div>
+      
+      <!-- Contenedor del formulario con scroll -->
+      <div class="form-container">
+        <!-- Aquí va el contenido del formulario que puede hacer scroll -->
+        <div class="form-section">
+          <!-- Campos del formulario -->
+        </div>
+      </div>
+      
+      <!-- Pestañas inferiores siempre visibles -->
+      <div class="tabs-container">
+        <div class="tab">Filiación</div>
+        <div class="tab active">Historia clínica</div>
+        <div class="tab">Odontograma</div>
+        <div class="tab">Periodontograma</div>
+        <div class="tab">Ortodoncia</div>
+        <div class="tab">Estado de cuenta</div>
+        <div class="tab">Prescripciones</div>
+        <div class="tab">Archivos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script para eliminar el botón Clínica -->
+  <script>
+    function eliminarBotonClinica() {
+      // Buscar el botón exacto por su clase y texto
+      const botones = document.querySelectorAll('button');
+      
+      botones.forEach(boton => {
+        // Verificar si el botón contiene el texto "Clínica"
+        if (boton.textContent.includes('Clínica')) {
+          // Verificar si tiene un SVG dentro (el ícono +)
+          const tieneSVG = boton.querySelector('svg');
+          
+          if (tieneSVG) {
+            // Este es nuestro botón, eliminarlo
+            boton.remove();
+          }
+        }
+      });
+    }
+
+    // Ejecutar la función cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', eliminarBotonClinica);
+    
+    // También ejecutar después de que la página esté completamente cargada
+    window.addEventListener('load', eliminarBotonClinica);
+    
+    // Ejecutar periódicamente para asegurar que el botón no reaparezca
+    setInterval(eliminarBotonClinica, 1000);
+  </script>
+</body>
+</html>
