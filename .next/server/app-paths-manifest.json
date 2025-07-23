@@ -1,6 +1,12 @@
 {
+  "/appointments/page": "app/appointments/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/patients/page": "app/patients/page.js",
   "/patients/[id]/page": "app/patients/[id]/page.js",
-  "/patients/[id]/clinica/page": "app/patients/[id]/clinica/page.js"
+  "/patients/[id]/clinica/page": "app/patients/[id]/clinica/page.js",
+  "/laboratorio/page": "app/laboratorio/page.js",
+  "/gastos/page": "app/gastos/page.js",
+  "/configuracion/page": "app/configuracion/page.js",
+  "/estadisticas/page": "app/estadisticas/page.js",
+  "/patients/page": "app/patients/page.js",
+  "/doctors/page": "app/doctors/page.js"
 }

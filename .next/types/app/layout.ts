@@ -1,4 +1,4 @@
-// File: C:\Users\GABY\Downloads\NGT CLINIC\app\layout.tsx
+// File: D:\Proyectos\NGT-CLINIC-sin-base-de-datos\app\layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
