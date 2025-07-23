@@ -1,0 +1,172 @@
+.App {
+  text-align: center;
+  background-color: #1e2433;
+  min-height: 100vh;
+  color: white;
+}
+
+.App-header {
+  background-color: #1e2433;
+  padding: 20px;
+  color: white;
+  border-bottom: 1px solid #2a3446;
+}
+
+.App-main {
+  background-color: #1e2433;
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  background-color: #1e2433;
+}
+
+.left-panel {
+  flex: 3;
+  position: relative;
+  background-color: #1e2433;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.left-panel.expanded {
+  flex: 4;
+}
+
+.right-panel {
+  flex: 1;
+  background-color: #1e2433;
+  border-left: 1px solid #2a3446;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.tooth-view-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #1e2433;
+}
+
+.view-menu-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #1e2433;
+}
+
+.sidebar-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+  background-color: #1e2433;
+}
+
+.toggle-panel-button {
+  position: absolute;
+  top: 50%;
+  right: -15px;
+  width: 30px;
+  height: 60px;
+  background-color: #2a3446;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 10;
+  transform: translateY(-50%);
+}
+
+/* Estilos para las pestañas de navegación */
+.tabs-navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  background-color: #1e2433;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  background-color: #1e2433;
+  color: #aaa;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-button.active {
+  color: white;
+  border-bottom: 2px solid #4a90e2;
+  background-color: #2a3446;
+}
+
+.tab-button:hover:not(.active) {
+  background-color: #2a3446;
+}
+
+/* Estilos para el módulo endodóntico */
+.endodontic-module {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #1e2433;
+}
+
+.test-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+  background-color: #1e2433;
+}
+
+.test-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background-color: #2a3446;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.test-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.test-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.test-name {
+  font-size: 14px;
+  color: white;
+}
+
+/* Línea verde para separar secciones */
+.section-divider {
+  height: 2px;
+  background-color: #1e2433;
+  margin: 20px 0;
+  width: 100%;
+}
+
+/* Estilos para el contenedor de componentes fijos */
+.fixed-components {
+  position: relative;
+  z-index: 1000;
+}

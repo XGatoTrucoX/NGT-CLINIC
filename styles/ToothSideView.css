@@ -1,0 +1,170 @@
+.tooth-side-view-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color: #1e2433;
+}
+
+.tooth-side-menu {
+  width: 40px;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #2a3142;
+  border-right: 1px solid #4a90e2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #4a90e2 #2a3142;
+}
+
+.tooth-menu-item {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2px 0;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.tooth-menu-item:hover {
+  background-color: rgba(74, 144, 226, 0.3);
+}
+
+.tooth-menu-item.active {
+  background-color: #4a90e2;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.7);
+}
+
+.tooth-side-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  overflow-y: auto; /* Permitir desplazamiento vertical */
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #4a90e2 #1e2433;
+  padding: 10px;
+}
+
+.tooth-side-view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #2a3142;
+  border-bottom: 1px solid #4a90e2;
+}
+
+.tooth-number {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4a90e2;
+  margin-right: 15px;
+}
+
+.tooth-type {
+  font-size: 16px;
+  color: #a0d2ff;
+}
+
+.tooth-images-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  padding: 10px 0;
+  gap: 50px; /* Espacio entre las imágenes para permitir ver el siguiente diente al desplazarse */
+}
+
+.tooth-side-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 33%;
+  padding: 5px;
+}
+
+.tooth-side-image {
+  max-height: 150px; /* Tamaño proporcional */
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(74, 144, 226, 0.7));
+  margin: 10px 0;
+}
+
+/* Ajustar tamaño de la vista incisal para que no se vea tan grande */
+.tooth-side-image-wrapper:nth-child(2) .tooth-side-image {
+  max-height: 100px;
+}
+
+/* Voltear la vista lingual 180 grados */
+.tooth-side-image-wrapper:nth-child(3) .tooth-side-image {
+  transform: rotate(180deg);
+}
+
+.tooth-view-label {
+  font-size: 14px;
+  color: #a0d2ff;
+  margin-top: 5px;
+}
+
+.tooth-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.tooth-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #4a90e2, transparent);
+  margin: 30px 0;
+  position: relative;
+}
+
+.tooth-divider:after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #4a90e2;
+  box-shadow: 0 0 10px #4a90e2;
+}
+
+.selected-indicator {
+  color: #4a90e2;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(74, 144, 226, 0.7);
+  border: 1px solid #4a90e2;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background-color: rgba(74, 144, 226, 0.1);
+}
+
+/* Efecto neón para resaltar elementos */
+.tooth-side-image-container:hover {
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.7);
+  transition: box-shadow 0.3s ease;
+}
+
+.tooth-side-image-container:hover .tooth-view-label {
+  color: #00ffff;
+  border-color: #00ffff;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+  transition: all 0.3s ease;
+}

@@ -1,0 +1,154 @@
+.perio-exam-panel {
+  width: 320px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  color: #333;
+  overflow: hidden;
+  position: absolute;
+  left: 20px; /* Posicionado a la izquierda como solicitaste */
+  top: 80px;
+  z-index: 1000;
+}
+
+.panel-header {
+  background-color: #2196F3;
+  color: white;
+  padding: 12px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.measurements-grid {
+  padding: 15px;
+  background-color: #f5f5f5;
+}
+
+.measurement-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.measurement-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+}
+
+.value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.label {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+.perio-indicators-section {
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+
+.perio-indicators-section h4 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #2196F3;
+  font-weight: 500;
+}
+
+.depth-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.depth-buttons button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.depth-buttons button.active {
+  background-color: #2196F3;
+  color: white;
+  border-color: #2196F3;
+}
+
+.indicators-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.indicator-button {
+  flex: 1;
+  padding: 8px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 13px;
+}
+
+.indicator-button.active {
+  background-color: #2196F3;
+  color: white;
+  border-color: #2196F3;
+}
+
+.panel-footer {
+  padding: 15px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+}
+
+.save-button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.save-button:hover {
+  background-color: #1976D2;
+}

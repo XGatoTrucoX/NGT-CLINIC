@@ -1,0 +1,147 @@
+.quick-select-container {
+  width: 100%;
+  padding: 15px;
+  background-color: #2a3142;
+  border-radius: 8px;
+  border: 2px solid #4a90e2;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.quick-select-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.selected-teeth-info {
+  margin-bottom: 15px;
+  color: white;
+  padding: 0 10px;
+}
+
+.teeth-selection-display h3 {
+  text-align: center;
+  font-size: 16px;
+  margin: 0 0 10px 0;
+  font-weight: 500;
+}
+
+.teeth-count {
+  background-color: #4a90e2;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.teeth-quadrants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px; /* Reducido de 10px */
+  justify-content: center;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.quadrant {
+  background-color: #2a3142;
+  border-radius: 5px;
+  padding: 3px 5px;
+  margin-bottom: 2px; /* Reducido de 3px */
+  width: calc(40% - 5px); /* Ajustado el margen de 10px a 5px */
+  box-sizing: border-box;
+  flex-shrink: 1;
+}
+
+.teeth-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.tooth-chip {
+  background-color: #4a90e2;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 15px;
+  display: inline-block;
+  margin: 1px; /* Añadido un pequeño margen */
+  flex-shrink: 0;
+}
+
+.no-selection {
+  text-align: center;
+  color: #aaa;
+  font-style: italic;
+  margin: 10px 0;
+}
+
+.quick-select-button {
+  background-color: #3b4559;
+  color: white;
+  border: 2px solid #4a90e2;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
+  min-width: 140px;
+  margin: 5px;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.quick-select-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.quick-select-button:hover:not(:disabled) {
+  background-color: #3a4152;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.quick-select-button:active:not(:disabled) {
+  background-color: #4a90e2;
+  transform: translateY(0);
+}
+
+.quick-select-button.selected {
+  background-color: #4a90e2;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto de onda al hacer clic */
+.quick-select-button::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity 1s;
+}
+
+.quick-select-button:active::after {
+  transform: scale(0, 0);
+  opacity: .3;
+  transition: 0s;
+}

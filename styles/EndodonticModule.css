@@ -1,0 +1,182 @@
+.endodontic-module {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.endodontic-module h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.endodontic-module h4 {
+  color: #2c3e50;
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.endo-tests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.endo-test-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+  margin-bottom: 10px;
+}
+
+.test-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.test-button:hover:not(:disabled) {
+  background-color: #e9ecef;
+}
+
+.test-button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.test-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.test-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+}
+
+.test-results {
+  display: flex;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.result-button {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #dee2e6;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.result-button:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.result-button:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.result-button.active {
+  background-color: #28a745;
+  color: white;
+  border-color: #28a745;
+}
+
+.result-button.active:last-child {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.endo-state-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.state-button {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.state-button:hover:not(:disabled) {
+  background-color: #e9ecef;
+}
+
+.state-button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.state-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Clases para estados específicos */
+.has-necrosis {
+  border: 2px solid #dc3545 !important;
+}
+
+.has-lesion {
+  border: 2px solid #fd7e14 !important;
+}
+
+.has-carilla {
+  border: 2px solid #20c997 !important;
+}
+
+.endo-view {
+  position: relative;
+}
+
+.endo-view::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 123, 255, 0.2);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.crown-indicator,
+.endo-indicator {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  bottom: 2px;
+  right: 2px;
+}
+
+.crown-indicator {
+  background-color: gold;
+}
+
+.endo-indicator {
+  background-color: #007bff;
+}

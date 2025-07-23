@@ -1,0 +1,313 @@
+import React, { useState, useEffect } from 'react';
+import '../styles/PeriodontalPanel.css';
+
+const PeriodontalPanel = ({ selectedTooth, activeMeasurement, onClose, onNavigate, tooth }) => {
+  // Estado para los valores de medición
+  const [measurementValue, setMeasurementValue] = useState(0);
+  
+  // Indicadores periodontales
+  const [sangrado, setSangrado] = useState(false);
+  const [placa, setPlaca] = useState(false);
+  const [pus, setPus] = useState(false);
+  const [sarro, setSarro] = useState(false);
+  
+  // Estados para furcación y movilidad
+  const [furcacion, setFurcacion] = useState(0);
+  const [movilidad, setMovilidad] = useState(0);
+  
+  // Valores para profundidad de palpación
+  const palpacionValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  
+  // Valores para margen gingival
+  const gingivalValues = [0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12];
+  
+  // Cargar valores iniciales del diente
+  useEffect(() => {
+    if (tooth && tooth.perioData) {
+      // Cargar el valor de la medición activa
+      if (tooth.perioData[activeMeasurement] !== undefined) {
+        setMeasurementValue(tooth.perioData[activeMeasurement]);
+      } else {
+        setMeasurementValue(0);
+      }
+      
+      // Cargar indicadores
+      setSangrado(tooth.perioData.sangrado || false);
+      setPlaca(tooth.perioData.placa || false);
+      setPus(tooth.perioData.pus || false);
+      setSarro(tooth.perioData.sarro || false);
+      
+      // Cargar furcación y movilidad
+      setFurcacion(tooth.perioData.furcacion || 0);
+      setMovilidad(tooth.perioData.movilidad || 0);
+    }
+  }, [tooth, activeMeasurement]);
+  
+  // Función para obtener el título del panel según la medición activa
+  const getPanelTitle = () => {
+    switch (activeMeasurement) {
+      case 'distopalatal':
+        return 'Disto Palatal';
+      case 'palatal':
+        return 'Palatal';
+      case 'mesiopalatal':
+        return 'Mesiopalatal';
+      case 'distobucal':
+        return 'Disto Bucal';
+      case 'bucal':
+        return 'Bucal';
+      case 'mesiobucal':
+        return 'Mesiobucal';
+      default:
+        return 'Periodontal';
+    }
+  };
+  
+  // Función para actualizar el valor de la medición
+  const handleValueChange = (value) => {
+    setMeasurementValue(value);
+    
+    // Actualizar los datos del diente
+    if (selectedTooth) {
+      // Crear un objeto con los datos periodontales actualizados
+      const perioData = {
+        [activeMeasurement]: value
+      };
+      
+      // Disparar un evento para actualizar los datos del diente
+      document.dispatchEvent(new CustomEvent('updateToothPerioData', {
+        detail: {
+          toothId: selectedTooth,
+          perioData: perioData
+        }
+      }));
+    }
+  };
+  
+  // Función para actualizar indicadores
+  const handleIndicatorChange = (indicator, value) => {
+    switch(indicator) {
+      case 'sangrado':
+        setSangrado(value);
+        break;
+      case 'placa':
+        setPlaca(value);
+        break;
+      case 'pus':
+        setPus(value);
+        break;
+      case 'sarro':
+        setSarro(value);
+        break;
+      default:
+        break;
+    }
+    
+    // Actualizar los datos del diente
+    if (selectedTooth) {
+      const perioData = {
+        [indicator]: value
+      };
+      
+      document.dispatchEvent(new CustomEvent('updateToothPerioData', {
+        detail: {
+          toothId: selectedTooth,
+          perioData: perioData
+        }
+      }));
+    }
+  };
+  
+  // Función para actualizar furcación
+  const handleFurcacionChange = (value) => {
+    setFurcacion(value);
+    
+    if (selectedTooth) {
+      const perioData = {
+        furcacion: value
+      };
+      
+      document.dispatchEvent(new CustomEvent('updateToothPerioData', {
+        detail: {
+          toothId: selectedTooth,
+          perioData: perioData
+        }
+      }));
+    }
+  };
+  
+  // Función para actualizar movilidad
+  const handleMovilidadChange = (value) => {
+    setMovilidad(value);
+    
+    if (selectedTooth) {
+      const perioData = {
+        movilidad: value
+      };
+      
+      document.dispatchEvent(new CustomEvent('updateToothPerioData', {
+        detail: {
+          toothId: selectedTooth,
+          perioData: perioData
+        }
+      }));
+    }
+  };
+  
+  // Función para navegar a otra medición
+  const handleNavigate = (measurement) => {
+    onNavigate(measurement);
+  };
+  
+  // Determinar si la medición es bucal o palatal para mostrar los valores correctos
+  const isBucal = ['distobucal', 'bucal', 'mesiobucal'].includes(activeMeasurement);
+  const values = isBucal ? gingivalValues : palpacionValues;
+  
+  return (
+    <div className="periodontal-panel">
+      <div className="panel-header">
+        <h3>{getPanelTitle()}</h3>
+        <div className="navigation-buttons">
+          <button 
+            className={activeMeasurement === 'distopalatal' ? 'active' : ''}
+            onClick={() => handleNavigate('distopalatal')}
+          >
+            Disto Palatal
+          </button>
+          <button 
+            className={activeMeasurement === 'palatal' ? 'active' : ''}
+            onClick={() => handleNavigate('palatal')}
+          >
+            Palatal
+          </button>
+          <button 
+            className={activeMeasurement === 'mesiopalatal' ? 'active' : ''}
+            onClick={() => handleNavigate('mesiopalatal')}
+          >
+            Mesiopalatal
+          </button>
+          <button 
+            className={activeMeasurement === 'distobucal' ? 'active' : ''}
+            onClick={() => handleNavigate('distobucal')}
+          >
+            Disto Bucal
+          </button>
+          <button 
+            className={activeMeasurement === 'bucal' ? 'active' : ''}
+            onClick={() => handleNavigate('bucal')}
+          >
+            Bucal
+          </button>
+          <button 
+            className={activeMeasurement === 'mesiobucal' ? 'active' : ''}
+            onClick={() => handleNavigate('mesiobucal')}
+          >
+            Mesiobucal
+          </button>
+        </div>
+        <button className="close-button" onClick={onClose}>×</button>
+      </div>
+      
+      <div className="panel-content">
+        <div className="section-title">
+          {isBucal ? 'MARGEN GINGIVAL' : 'PROFUNDIDAD DE PALPACIÓN'}
+        </div>
+        
+        <div className="value-grid">
+          {values.map((value) => (
+            <button 
+              key={value}
+              className={measurementValue === value ? 'active' : ''}
+              onClick={() => handleValueChange(value)}
+            >
+              {value}
+            </button>
+          ))}
+        </div>
+        
+        <div className="section-title">INDICADORES</div>
+        <div className="indicators">
+          <button 
+            className={`indicator ${sangrado ? 'active' : ''}`}
+            onClick={() => handleIndicatorChange('sangrado', !sangrado)}
+          >
+            <span className="indicator-color" style={{ backgroundColor: '#e74c3c' }}></span>
+            Sangrado
+          </button>
+          <button 
+            className={`indicator ${placa ? 'active' : ''}`}
+            onClick={() => handleIndicatorChange('placa', !placa)}
+          >
+            <span className="indicator-color" style={{ backgroundColor: '#3498db' }}></span>
+            Placa
+          </button>
+          <button 
+            className={`indicator ${pus ? 'active' : ''}`}
+            onClick={() => handleIndicatorChange('pus', !pus)}
+          >
+            <span className="indicator-color" style={{ backgroundColor: '#f1c40f' }}></span>
+            Pus
+          </button>
+          <button 
+            className={`indicator ${sarro ? 'active' : ''}`}
+            onClick={() => handleIndicatorChange('sarro', !sarro)}
+          >
+            <span className="indicator-color" style={{ backgroundColor: '#95a5a6' }}></span>
+            Sarro
+          </button>
+        </div>
+        
+        <div className="section-title">FURCACIÓN</div>
+        <div className="furcacion">
+          <button 
+            className={furcacion === 1 ? 'active' : ''}
+            onClick={() => handleFurcacionChange(furcacion === 1 ? 0 : 1)}
+          >
+            Etapa 1
+          </button>
+          <button 
+            className={furcacion === 2 ? 'active' : ''}
+            onClick={() => handleFurcacionChange(furcacion === 2 ? 0 : 2)}
+          >
+            Etapa 2
+          </button>
+          <button 
+            className={furcacion === 3 ? 'active' : ''}
+            onClick={() => handleFurcacionChange(furcacion === 3 ? 0 : 3)}
+          >
+            Etapa 3
+          </button>
+        </div>
+        
+        <div className="section-title">MOVILIDAD DENTAL</div>
+        <div className="movilidad">
+          <button 
+            className={movilidad === 1 ? 'active' : ''}
+            onClick={() => handleMovilidadChange(movilidad === 1 ? 0 : 1)}
+          >
+            Clase 1
+          </button>
+          <button 
+            className={movilidad === 2 ? 'active' : ''}
+            onClick={() => handleMovilidadChange(movilidad === 2 ? 0 : 2)}
+          >
+            Clase 2
+          </button>
+          <button 
+            className={movilidad === 3 ? 'active' : ''}
+            onClick={() => handleMovilidadChange(movilidad === 3 ? 0 : 3)}
+          >
+            Clase 3
+          </button>
+        </div>
+        
+        <div className="action-buttons">
+          <button className="cancel-button" onClick={onClose}>Cancelar</button>
+          <button className="save-button" onClick={onClose}>Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PeriodontalPanel;

@@ -1,0 +1,793 @@
+/*!********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./styles/Odontograma.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************/
+.odontograma-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #1e2433;
+  border-radius: 5px;
+  position: relative;
+}
+
+.teeth-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+
+.upper-arch, .lower-arch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.upper-teeth, .lower-teeth, .upper-teeth-incisal, .lower-teeth-incisal, .upper-teeth-lingual, .lower-teeth-lingual {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.upper-teeth, .lower-teeth {
+  height: 140px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.upper-teeth-incisal, .lower-teeth-incisal {
+  height: 100px;
+  margin-bottom: 5px;
+}
+
+/* Separación especial para los dientes incisales */
+.tooth-container.incisal-view {
+  margin: 0 6px; /* Separación de 6mm entre dientes incisales */
+}
+
+.upper-teeth-lingual, .lower-teeth-lingual {
+  height: 180px;
+}
+
+.teeth-numbers {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0;
+  position: relative;
+  top: 0;
+  z-index: 10;
+}
+
+.tooth-number {
+  width: 30px;
+  text-align: center;
+  font-size: 12px;
+  color: white;
+  margin: 0 2px;
+  position: relative;
+  top: 0;
+}
+
+.tooth-container {
+  position: relative;
+  margin: 0 3px; /* Separación de 3mm entre dientes bucales */
+  cursor: pointer;
+  transition: transform 0.2s;
+  transform: scale(0.85); /* Aumento del 15% respecto al tamaño reducido anterior */
+}
+
+.tooth-container:hover {
+  transform: scale(0.9); /* Hover ligeramente más grande que el tamaño base */
+}
+
+.tooth-container.selected {
+  transform: scale(0.95); /* Selección más grande que el hover */
+  z-index: 10;
+}
+
+.clinical-parameters {
+  width: 250px;
+  background-color: #2a3142;
+  padding: 15px;
+  border-radius: 5px;
+  margin-left: 20px;
+  position: absolute;
+  right: 20px;
+  top: 80px;
+}
+
+.clinical-parameters h3 {
+  color: white;
+  margin-top: 0;
+  border-bottom: 1px solid #3a4152;
+  padding-bottom: 10px;
+}
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./styles/Tooth.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
+.tooth-container {
+  position: relative;
+  width: 90px;
+  margin: 0 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.tooth-container.buccal-view, .tooth-container.lingual-view {
+  height: 180px;
+}
+
+.tooth-container.incisal-view {
+  height: 100px;
+}
+
+/* Estilo para el indicador de selección (check) */
+.tooth-selected-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.tooth-selected-indicator svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Estilo para dientes seleccionados */
+.tooth-container.selected {
+  position: relative;
+  border-radius: 3px;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.7);
+  z-index: 5;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.tooth-image {
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Clase para aplicar el efecto espejo */
+.tooth-image.mirrored {
+  transform: scaleX(-1);
+}
+
+/* Para la vista lingual, necesitamos invertir verticalmente la imagen */
+.lingual-view .tooth-image {
+  transform: scaleY(-1);
+}
+
+/* Para la vista lingual con efecto espejo, necesitamos invertir horizontal y verticalmente */
+.lingual-view .tooth-image.mirrored {
+  transform: scaleX(-1) scaleY(-1);
+}
+
+.absent-tooth {
+  width: 67px;
+  height: 135px;
+  background-color: #333;
+  opacity: 0.3;
+  border-radius: 3px;
+}
+
+.condition-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  pointer-events: none;
+}
+
+.tooth-condition {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* También aplicamos el efecto espejo a las condiciones */
+.tooth-condition.mirrored {
+  transform: scaleX(-1);
+}
+
+/* Para las condiciones en vista lingual */
+.lingual-view .tooth-condition {
+  transform: scaleY(-1);
+}
+
+.lingual-view .tooth-condition.mirrored {
+  transform: scaleX(-1) scaleY(-1);
+}
+
+/* Estilo para dientes marcados para extracción */
+.tooth-container.to-be-extracted {
+  outline: 2px dashed #ff0000;
+  border-radius: 12px;
+  position: relative;
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba(255, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+  }
+}
+
+/* Opcional: Agregar un indicador visual adicional */
+.tooth-container.to-be-extracted::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 0, 0, 0.1);
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+/* Estilo para dientes ausentes */
+.tooth-container.absent-tooth {
+  outline: 2px solid #3498db;
+  border-radius: 12px;
+  position: relative;
+}
+
+.absent-tooth-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(52, 152, 219, 0.1);
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+.absent-tooth-image {
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+/* Estilos para los diferentes estados de los dientes */
+.tooth-container.has-carilla {
+  outline: 2px solid #9b59b6;
+  border-radius: 8px;
+}
+
+.tooth-container.has-necrosis {
+  outline: 2px solid #e74c3c;
+  border-radius: 8px;
+}
+
+.tooth-container.has-lesion {
+  outline: 2px solid #f39c12;
+  border-radius: 8px;
+}
+
+/* Estilos para la vista endodóntica */
+.tooth-container.endo-view {
+  background-color: rgba(52, 152, 219, 0.05);
+  border-radius: 8px;
+}
+
+/* Indicadores para condiciones específicas */
+.crown-indicator {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: #9b59b6;
+  border-radius: 50%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.endo-indicator {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: #e74c3c;
+  border-radius: 50%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para errores de carga de imagen */
+.image-error-indicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5px;
+  font-size: 10px;
+  color: #721c24;
+}
+
+/* Animación para dientes seleccionados */
+@keyframes selected-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba(74, 144, 226, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(74, 144, 226, 0);
+  }
+}
+
+.tooth-container.selected {
+  animation: selected-pulse 2s infinite;
+}
+
+/* Tooltip para mostrar información al pasar el mouse */
+.tooth-container::after {
+  content: attr(data-tooth-id);
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2a3142;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 20;
+}
+
+.tooth-container:hover::after {
+  opacity: 1;
+}
+
+/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./styles/PerioLines.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************/
+.perio-lines-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Para que no interfiera con los clics en el diente */
+  z-index: 10;
+}
+
+.perio-line {
+  position: absolute;
+  border-radius: 1px;
+}
+
+.profundidad-line {
+  background-color: #3498db; /* Azul para profundidad de palpación */
+}
+
+.margen-line {
+  background-color: #e74c3c; /* Rojo para margen gingival */
+}
+
+/* Animación para hacer las líneas más visibles */
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.perio-line.highlight {
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/*!*********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./styles/DateTimeline.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************/
+.date-timeline-container {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.timeline-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.timeline-icon {
+  font-size: 20px;
+  color: #333;
+}
+
+.timeline-panel {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  width: 300px;
+  background-color: #1e2433;
+  border: 1px solid #2a3446;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  color: white;
+}
+
+.timeline-header {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid #eee;
+}
+
+.close-timeline {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+}
+
+.timeline-content {
+  padding: 15px;
+}
+
+.timeline-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.nav-button {
+  width: 30px;
+  height: 30px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.date-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date-selector span {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.selected-date {
+  font-weight: 500;
+  color: #333;
+}
+
+.timeline-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.date-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: white;
+}
+
+.date-item:hover {
+  background-color: #2a3446;
+}
+
+.date-item.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+.date-timeline {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.date-button {
+  display: flex;
+  align-items: center;
+  background-color: #1e2433;
+  color: white;
+  border: 1px solid #2a3446;
+  border-radius: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.date-icon {
+  margin-right: 8px;
+}
+
+.date-panel {
+  background-color: #1e2433;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  width: 200px;
+  overflow: hidden;
+}
+
+.date-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #2a3446;
+  background-color: #1e2433;
+  color: white;
+  font-size: 14px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.close-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.date-list {
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #1e2433;
+}
+
+.date-option {
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-bottom: 1px solid #2a3446;
+}
+
+.date-option:hover {
+  background-color: #2a3446;
+}
+
+.date-option.active {
+  background-color: #4a90e2;
+}
+/*!***********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./styles/PerioExamPanel.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************/
+.perio-exam-panel {
+  width: 320px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  color: #333;
+  overflow: hidden;
+  position: absolute;
+  left: 20px; /* Posicionado a la izquierda como solicitaste */
+  top: 80px;
+  z-index: 1000;
+}
+
+.panel-header {
+  background-color: #2196F3;
+  color: white;
+  padding: 12px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.measurements-grid {
+  padding: 15px;
+  background-color: #f5f5f5;
+}
+
+.measurement-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.measurement-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+}
+
+.value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.label {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+.perio-indicators-section {
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+
+.perio-indicators-section h4 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #2196F3;
+  font-weight: 500;
+}
+
+.depth-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.depth-buttons button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.depth-buttons button.active {
+  background-color: #2196F3;
+  color: white;
+  border-color: #2196F3;
+}
+
+.indicators-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.indicator-button {
+  flex: 1;
+  padding: 8px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 13px;
+}
+
+.indicator-button.active {
+  background-color: #2196F3;
+  color: white;
+  border-color: #2196F3;
+}
+
+.panel-footer {
+  padding: 15px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+}
+
+.save-button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.save-button:hover {
+  background-color: #1976D2;
+}

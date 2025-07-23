@@ -1,0 +1,40 @@
+.perio-lines-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Para que no interfiera con los clics en el diente */
+  z-index: 10;
+}
+
+.perio-line {
+  position: absolute;
+  border-radius: 1px;
+}
+
+.profundidad-line {
+  background-color: #3498db; /* Azul para profundidad de palpación */
+}
+
+.margen-line {
+  background-color: #e74c3c; /* Rojo para margen gingival */
+}
+
+/* Animación para hacer las líneas más visibles */
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.perio-line.highlight {
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}

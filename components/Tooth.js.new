@@ -1,0 +1,185 @@
+import React, { useState, useEffect, useRef } from 'react';
+import '../styles/Tooth.css';
+import { cargarVista, needsMirroring, getMirrorToothId } from '../utils/dentalViewSystem';
+
+const Tooth = ({ tooth, isSelected, onSelect, activeMode }) => {
+  // Estado para rastrear si la imagen se cargó correctamente
+  const [imageLoaded, setImageLoaded] = useState(true);
+  // Estado para rastrear si se está mostrando la vista endodóntica
+  const [showEndoView, setShowEndoView] = useState(false);
+  // Referencia a la imagen para poder actualizarla
+  const imageRef = useRef(null);
+  // Estado para forzar la recarga de la imagen
+  const [imageKey, setImageKey] = useState(Date.now());
+  
+  // Escuchar eventos de cambio de modo endodóntico
+  useEffect(() => {
+    const handleEndoModeChange = (event) => {
+      setShowEndoView(event.detail.active);
+    };
+    
+    document.addEventListener('endoModeChange', handleEndoModeChange);
+    return () => {
+      document.removeEventListener('endoModeChange', handleEndoModeChange);
+    };
+  }, []);
+  
+  // Efecto para actualizar la imagen cuando cambie el estado del diente
+  useEffect(() => {
+    // Forzar la recarga de la imagen cuando cambie el estado del diente
+    setImageKey(Date.now());
+    
+    // Si tenemos una referencia a la imagen, forzar su recarga
+    if (imageRef.current) {
+      const currentSrc = imageRef.current.src;
+      if (currentSrc.includes('?')) {
+        imageRef.current.src = currentSrc.split('?')[0] + '?t=' + Date.now();
+      } else {
+        imageRef.current.src = currentSrc + '?t=' + Date.now();
+      }
+    }
+  }, [tooth.isAbsent, tooth.isImplant, tooth.isPontic, tooth.hasWear, tooth.hasCarilla, 
+      tooth.hasNecrosis, tooth.hasLesionPeriapical, tooth.conditions]);
+
+  // Variables para la ruta de la imagen
+  const basePath = `/images/teeth/`;
+  const position = tooth.position || 'buccal';
+  
+  // Determinar el ID del diente para la imagen (considerando el espejo)
+  let toothId = tooth.id;
+  if (needsMirroring(tooth.id)) {
+    toothId = getMirrorToothId(tooth.id);
+  }
+
+  // Determinar qué imagen mostrar según el estado del diente
+  const getToothImage = () => {
+    // Si estamos en modo endodóntico y el diente tiene condiciones relacionadas
+    if (showEndoView && hasEndoCondition()) {
+      return getEndoImage();
+    }
+    
+    // Determinar el estado del diente
+    let estado = 'tooth';
+    
+    if (tooth.isAbsent) {
+      // Para dientes ausentes, solo mostramos el número
+      return null;
+    } else if (tooth.isImplant) {
+      estado = 'implante';
+      console.log('Aplicando estado implante al diente', tooth.id);
+    } else if (tooth.isPontic) {
+      estado = 'pontic';
+    } else if (tooth.hasWear) {
+      estado = 'desgaste';
+    } else if (tooth.hasCarilla) {
+      estado = 'carilla';
+    } else if (tooth.hasNecrosis) {
+      estado = 'necrosis';
+    } else if (tooth.hasLesionPeriapical) {
+      estado = 'lesion_periapical';
+    } else if (hasCondition('corona')) {
+      estado = 'corona';
+    } else if (hasCondition('endodoncia')) {
+      estado = 'endodoncia';
+    }
+    
+    // Usar la función cargarVista para obtener la ruta de la imagen
+    const imagePath = cargarVista(tooth.id, position, estado, true);
+    console.log('Ruta de imagen generada:', imagePath, 'Estado:', estado);
+    
+    return imagePath;
+  };
+  
+  // Verificar si el diente tiene una condición específica
+  const hasCondition = (conditionType) => {
+    return tooth.conditions && tooth.conditions.some(condition => condition.type === conditionType);
+  };
+  
+  // Verificar si el diente tiene alguna condición relacionada con endodoncia
+  const hasEndoCondition = () => {
+    return tooth.hasNecrosis || 
+           tooth.hasLesionPeriapical || 
+           tooth.hasImplantEndo || 
+           hasCondition('endodoncia');
+  };
+  
+  // Obtener la imagen para la vista endodóntica
+  const getEndoImage = () => {
+    const endoPath = `${basePath}endodoncia/endo.${toothId}.png`;
+    return endoPath;
+  };
+  
+  // Manejar el evento de clic en el diente
+  const handleClick = () => {
+    onSelect(tooth.id);
+    
+    // Si estamos en modo de selección rápida, no disparar el evento toothSelect
+    if (activeMode !== 'quickselect') {
+      // Disparar un evento personalizado para notificar la selección del diente
+      document.dispatchEvent(new CustomEvent('toothSelect', {
+        detail: { toothId: tooth.id }
+      }));
+    }
+  };
+  
+  // Manejar el error de carga de la imagen
+  const handleImageError = () => {
+    console.error(`Error al cargar la imagen para el diente ${tooth.id}`);
+    setImageLoaded(false);
+  };
+  
+  // Determinar si el diente necesita ser espejado
+  const needsMirror = needsMirroring(tooth.id);
+  
+  // Determinar las clases CSS para el diente
+  const toothClasses = [
+    'tooth',
+    isSelected ? 'selected' : '',
+    tooth.isAbsent ? 'absent' : '',
+    tooth.isImplant ? 'implant' : '',
+    tooth.isPontic ? 'pontic' : '',
+    tooth.hasWear ? 'wear' : '',
+    tooth.hasCarilla ? 'carilla' : '',
+    tooth.hasNecrosis ? 'necrosis' : '',
+    tooth.hasLesionPeriapical ? 'lesion-periapical' : '',
+    needsMirror ? 'mirrored' : '',
+    hasEndoCondition() ? 'endo-condition' : '',
+    !imageLoaded ? 'image-error' : ''
+  ].filter(Boolean).join(' ');
+  
+  // Obtener la imagen del diente
+  const toothImage = getToothImage();
+  
+  return (
+    <div 
+      className={toothClasses}
+      onClick={handleClick}
+      data-tooth-id={tooth.id}
+      data-position={position}
+    >
+      {tooth.isAbsent ? (
+        <div className="absent-tooth">{tooth.id}</div>
+      ) : (
+        <>
+          {toothImage && (
+            <img
+              ref={imageRef}
+              key={imageKey}
+              src={toothImage}
+              alt={`Diente ${tooth.id}`}
+              className={needsMirror ? 'mirrored-image' : ''}
+              onError={handleImageError}
+            />
+          )}
+          {!imageLoaded && (
+            <div className="tooth-error">
+              <span>{tooth.id}</span>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default Tooth;

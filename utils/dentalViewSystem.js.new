@@ -1,0 +1,219 @@
+/**
+ * Sistema de visualización dental
+ * Este módulo contiene funciones para manejar la visualización de dientes,
+ * incluyendo el espejado automático y la carga de imágenes según el estado del diente.
+ */
+
+// Mapeo de dientes para espejado automático
+export const mirrorMapping = {
+  // Espejado horizontal (dientes superiores)
+  horizontal: {
+    11: 21, 12: 22, 13: 23, 14: 24, 15: 25, 16: 26, 17: 27, 18: 28,
+    21: 11, 22: 12, 23: 13, 24: 14, 25: 15, 26: 16, 27: 17, 28: 18
+  },
+  // Espejado vertical (dientes inferiores)
+  vertical: {
+    31: 41, 32: 42, 33: 43, 34: 44, 35: 45, 36: 46, 37: 47, 38: 48,
+    41: 31, 42: 32, 43: 33, 44: 34, 45: 35, 46: 36, 47: 37, 48: 38
+  }
+};
+
+// Validación de compatibilidad de estados
+export const stateCompatibility = {
+  // Estados incompatibles con diente ausente
+  ausente: {
+    implante: false,
+    pontic: false,
+    desgaste: false,
+    carilla: false,
+    corona: false,
+    endodoncia: false,
+    necrosis: false,
+    lesion_periapical: false,
+    caries: false,
+    obturacion: false
+  },
+  // Estados incompatibles con implante
+  implante: {
+    ausente: false,
+    pontic: false,
+    desgaste: false,
+    carilla: true, // Un implante puede tener una carilla
+    corona: true, // Un implante puede tener una corona
+    endodoncia: false, // Un implante no puede tener endodoncia
+    necrosis: false,
+    lesion_periapical: false,
+    caries: false,
+    obturacion: false
+  },
+  // Estados incompatibles con puente (pontic)
+  pontic: {
+    ausente: false,
+    implante: false,
+    desgaste: false,
+    carilla: false,
+    corona: false,
+    endodoncia: false,
+    necrosis: false,
+    lesion_periapical: false,
+    caries: false,
+    obturacion: false
+  },
+  // Configuración por defecto para pruebas endodónticas
+  endodoncia: {
+    frio: true,
+    calor: true,
+    electricidad: true,
+    percusion: true,
+    palpacion: true
+  },
+  default: {
+    frio: true,
+    calor: true,
+    electricidad: true,
+    percusion: true,
+    palpacion: true
+  }
+};
+
+/**
+ * Get the mirror tooth ID based on the current tooth ID
+ * @param {number} toothId - The current tooth ID
+ * @returns {number} - The mirror tooth ID
+ */
+export const getMirrorToothId = (toothId) => {
+  // Check horizontal mirroring (upper teeth)
+  if (mirrorMapping.horizontal[toothId]) {
+    return mirrorMapping.horizontal[toothId];
+  }
+  
+  // Check vertical mirroring (lower teeth)
+  if (mirrorMapping.vertical[toothId]) {
+    return mirrorMapping.vertical[toothId];
+  }
+  
+  // Return the original ID if no mirroring is needed
+  return toothId;
+};
+
+/**
+ * Check if a tooth needs mirroring based on its ID
+ * @param {number} toothId - The tooth ID to check
+ * @returns {boolean} - Whether the tooth needs mirroring
+ */
+export const needsMirroring = (toothId) => {
+  // Upper teeth (21-28) or lower teeth (31-38)
+  return (toothId >= 21 && toothId <= 28) || (toothId >= 31 && toothId <= 38);
+};
+
+/**
+ * Generate the image path for a tooth based on its state and view
+ * @param {number} toothId - The tooth ID
+ * @param {string} vista - The view (buccal, lingual, incisal)
+ * @param {string} estado - The tooth state
+ * @param {boolean} forceReload - Whether to force reload the image
+ * @returns {string} - The image path
+ */
+export const cargarVista = (toothId, vista, estado = 'tooth', forceReload = true) => {
+  // Base path for tooth images
+  const basePath = `/images/teeth/`;
+  
+  // Determine the tooth ID for the image (considering mirroring)
+  const imageToothId = needsMirroring(toothId) ? getMirrorToothId(toothId) : toothId;
+  
+  // Construct the image path based on the state
+  let imagePath = `${basePath}${vista}/`;
+  
+  // Timestamp to prevent caching
+  const timestamp = forceReload ? `?t=${Date.now()}` : '';
+  
+  // Log para depuración
+  console.log(`Cargando imagen para diente ${toothId}, estado: ${estado}, vista: ${vista}`);
+  
+  // Add the view prefix and state
+  switch (estado) {
+    case 'faltante':
+      return `${imagePath}${vista}.${imageToothId}.png${timestamp}`;
+    case 'implante':
+      const implantPath = `${imagePath}${vista}.implant.${imageToothId}.png${timestamp}`;
+      console.log('Ruta de implante:', implantPath);
+      return implantPath;
+    case 'pontic':
+      return `${imagePath}${vista}.pontics.${imageToothId}.png${timestamp}`;
+    case 'desgaste':
+      return `${imagePath}${vista}.dental.wear.${imageToothId}.png${timestamp}`;
+    case 'carilla':
+      return `${imagePath}${vista}.carilla.${imageToothId}.png${timestamp}`;
+    case 'implante_endodoncia':
+      return `${imagePath}${vista}.implant.endo.${imageToothId}.png${timestamp}`;
+    case 'necrosis':
+      return `${imagePath}${vista}.necrosis.${imageToothId}.png${timestamp}`;
+    case 'lesion_periapical':
+      return `${imagePath}${vista}.lesion.periapical.${imageToothId}.png${timestamp}`;
+    case 'corona':
+      return `${imagePath}${vista}.corona.${imageToothId}.png${timestamp}`;
+    case 'endodoncia':
+      return `${imagePath}${vista}.endo.${imageToothId}.png${timestamp}`;
+    default:
+      return `${imagePath}${vista}.tooth.${imageToothId}.png${timestamp}`;
+  }
+};
+
+/**
+ * Apply a state to a tooth and handle automatic mirroring
+ * @param {Array} teethData - The current teeth data
+ * @param {number} toothId - The tooth ID to update
+ * @param {string} state - The state to apply
+ * @param {boolean} applyMirroring - Whether to apply automatic mirroring
+ * @returns {Array} - The updated teeth data
+ */
+export const applyStateToTooth = (teethData, toothId, state, applyMirroring = true) => {
+  // Create a copy of the teeth data
+  const updatedTeethData = [...teethData];
+  
+  // Find the tooth to update
+  const toothIndex = updatedTeethData.findIndex(t => t.id === toothId);
+  if (toothIndex === -1) return updatedTeethData;
+  
+  // Apply the state to the tooth
+  updatedTeethData[toothIndex] = { ...updatedTeethData[toothIndex], ...state };
+  
+  // Apply mirroring if needed
+  if (applyMirroring && needsMirroring(toothId)) {
+    const mirrorToothId = getMirrorToothId(toothId);
+    const mirrorToothIndex = updatedTeethData.findIndex(t => t.id === mirrorToothId);
+    
+    if (mirrorToothIndex !== -1) {
+      // Apply the same state to the mirror tooth
+      updatedTeethData[mirrorToothIndex] = { ...updatedTeethData[mirrorToothIndex], ...state };
+    }
+  }
+  
+  return updatedTeethData;
+};
+
+/**
+ * Validar si un estado es compatible con el estado actual del diente
+ * @param {Object} tooth - El diente a validar
+ * @param {string} newState - El nuevo estado a aplicar
+ * @returns {boolean} - Si el estado es compatible
+ */
+export const validateStateCompatibility = (tooth, newState) => {
+  // Si el diente está ausente, solo se puede cambiar a presente
+  if (tooth.isAbsent && newState !== 'presente') {
+    return stateCompatibility.ausente[newState] !== false;
+  }
+  
+  // Si el diente tiene un implante
+  if (tooth.isImplant) {
+    return stateCompatibility.implante[newState] !== false;
+  }
+  
+  // Si el diente es un puente
+  if (tooth.isPontic) {
+    return stateCompatibility.pontic[newState] !== false;
+  }
+  
+  // Por defecto, permitir el cambio
+  return true;
+};

@@ -1,0 +1,681 @@
+.tooth-detail-view {
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+}
+
+.tooth-detail-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 15px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  gap: 10px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-right: 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #e0e0e0;
+}
+
+.back-icon {
+  margin-right: 5px;
+  font-size: 16px;
+}
+
+.tooth-detail-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.tooth-detail-content {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.content-area {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.treatment-categories {
+  flex: 1;
+  min-width: 300px;
+}
+
+.category {
+  margin-bottom: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.category.expanded {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.category-header.estado {
+  background: linear-gradient(135deg, #4CAF50, #2E7D32);
+}
+
+.category-header.tratamientos {
+  background: linear-gradient(135deg, #2196F3, #0D47A1);
+}
+
+.category-header.patologias {
+  background: linear-gradient(135deg, #F44336, #B71C1C);
+}
+
+.category-header.otros {
+  background: linear-gradient(135deg, #9C27B0, #4A148C);
+}
+
+.category-header:hover {
+  filter: brightness(1.1);
+}
+
+.expand-icon {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.expanded .expand-icon {
+  transform: rotate(180deg);
+}
+
+.category-content {
+  background-color: white;
+  padding: 15px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.subcategory {
+  margin-bottom: 15px;
+}
+
+.subcategory-header {
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.treatment-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.treatment-btn {
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.treatment-btn:hover {
+  background-color: #e0e0e0;
+  border-color: #bdbdbd;
+}
+
+.treatment-btn.active {
+  background-color: #e3f2fd;
+  border-color: #2196F3;
+  color: #0D47A1;
+  font-weight: 500;
+}
+
+/* Estilos para el panel periodontal */
+.periodontal-panel {
+  flex: 1;
+  min-width: 300px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 20px;
+  color: #333;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.palpacion-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.palpacion-btn .icon {
+  font-weight: bold;
+}
+
+/* Estilos para la cuadrícula de mediciones periodontales */
+.perio-measurements-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.perio-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.perio-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.perio-cell:hover {
+  border-color: #007bff;
+  background-color: #f0f7ff;
+}
+
+.perio-value {
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.perio-slider {
+  width: 100%;
+  height: 2px;
+  background-color: #eaeaea;
+  position: relative;
+  margin: 5px 0 10px 0;
+}
+
+.slider-circle {
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  border: 1px solid #007bff;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #007bff;
+}
+
+.perio-label {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+.measurement-label {
+  font-weight: 500;
+  color: #555;
+  font-size: 14px;
+}
+
+.measurement-inputs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.measurement-input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 80px;
+}
+
+.measurement-input label {
+  font-size: 13px;
+  color: #666;
+}
+
+.measurement-input input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.measurement-input input:focus {
+  border-color: #2196F3;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #2196F3;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1976D2;
+}
+
+.btn-secondary {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+  background-color: #e0e0e0;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .content-area {
+    flex-direction: column;
+  }
+  
+  .treatment-categories,
+  .periodontal-panel {
+    min-width: 100%;
+  }
+  
+  .measurement-inputs {
+    flex-direction: column;
+  }
+  
+  .measurement-input {
+    min-width: 100%;
+  }
+}
+
+/* Estilos para navegación entre dientes */
+.tooth-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-button:hover {
+  background-color: #e0e0e0;
+}
+
+.nav-button.prev {
+  padding-left: 10px;
+}
+
+.nav-button.next {
+  padding-right: 10px;
+}
+
+.important-section {
+  background-color: #e8f5e9;
+  border-left: 4px solid #4caf50;
+}
+
+.state-value {
+  color: #2196f3;
+}
+
+.tooth-state {
+  font-size: 18px;
+  font-weight: 500;
+  color: #2196f3;
+}
+
+.treatment-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.treatment-button {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.treatment-button:hover {
+  background-color: #1976d2;
+}
+
+.tooth-notes {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.save-notes-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.save-notes-button:hover {
+  background-color: #388e3c;
+}
+
+/* Estilos para las pruebas endodónticas */
+.endodontic-tests {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.test-row {
+  margin-bottom: 10px;
+}
+
+.test-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.test-icon {
+  font-size: 18px;
+  color: #2196f3;
+  width: 24px;
+  text-align: center;
+}
+
+.test-label {
+  flex: 1;
+  font-weight: 500;
+  color: #333;
+}
+
+.test-button {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.test-button:hover {
+  background-color: #1976d2;
+}
+
+/* Estilos para la sección periodontal */
+.perio-measurements-grid {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.perio-measurement-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.perio-measurement-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.perio-measurement-cell:hover {
+  background-color: #e9e9e9;
+  transform: translateY(-2px);
+}
+
+.perio-measurement-cell .value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.perio-measurement-cell .label {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+.perio-action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.perio-action-button {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: bold;
+}
+
+.perio-action-button:hover {
+  background-color: #2980b9;
+}
+
+.button-icon {
+  margin-right: 5px;
+}
+
+.periodontal-grid {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+.periodontal-row {
+  display: table-row;
+}
+
+.periodontal-cell {
+  display: table-cell;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.periodontal-cell.header {
+  background-color: #f0f0f0;
+  font-weight: 500;
+  color: #333;
+}
+
+.periodontal-cell.label {
+  background-color: #f0f0f0;
+  font-weight: 500;
+  width: 40px;
+}
+
+.periodontal-cell.value {
+  color: #2196f3;
+  font-weight: 500;
+}
+
+.periodontal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.periodontal-button {
+  display: flex;
+  align-items: center;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.periodontal-button:hover {
+  background-color: #1976d2;
+}
+
+/* Estilos para la navegación entre dientes */
+.tooth-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto;
+  gap: 10px;
+}
+
+.prev-tooth-button,
+.next-tooth-button {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.prev-tooth-button:hover,
+.next-tooth-button:hover {
+  background-color: #e0e0e0;
+}
+
+.prev-tooth-icon,
+.next-tooth-icon {
+  font-size: 16px;
+}
+
+.prev-tooth-icon {
+  margin-right: 5px;
+}
+
+.next-tooth-icon {
+  margin-left: 5px;
+}

@@ -1,0 +1,203 @@
+.date-timeline-container {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.timeline-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.timeline-icon {
+  font-size: 20px;
+  color: #333;
+}
+
+.timeline-panel {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  width: 300px;
+  background-color: #1e2433;
+  border: 1px solid #2a3446;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  color: white;
+}
+
+.timeline-header {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid #eee;
+}
+
+.close-timeline {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+}
+
+.timeline-content {
+  padding: 15px;
+}
+
+.timeline-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.nav-button {
+  width: 30px;
+  height: 30px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.date-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date-selector span {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.selected-date {
+  font-weight: 500;
+  color: #333;
+}
+
+.timeline-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.date-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: white;
+}
+
+.date-item:hover {
+  background-color: #2a3446;
+}
+
+.date-item.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+.date-timeline {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.date-button {
+  display: flex;
+  align-items: center;
+  background-color: #1e2433;
+  color: white;
+  border: 1px solid #2a3446;
+  border-radius: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.date-icon {
+  margin-right: 8px;
+}
+
+.date-panel {
+  background-color: #1e2433;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  width: 200px;
+  overflow: hidden;
+}
+
+.date-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #2a3446;
+  background-color: #1e2433;
+  color: white;
+  font-size: 14px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.close-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.date-list {
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #1e2433;
+}
+
+.date-option {
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-bottom: 1px solid #2a3446;
+}
+
+.date-option:hover {
+  background-color: #2a3446;
+}
+
+.date-option.active {
+  background-color: #4a90e2;
+}
