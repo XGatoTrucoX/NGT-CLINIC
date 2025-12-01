@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './styles/Tooth.css';
 import dentalViewSystem from './utils/dentalViewSystem';
 import PerioLines from './PerioLines';
+import ToothConditionMarkers from './ToothConditionMarkers';
 
 const { cargarVista, needsMirroring, getMirrorToothId } = dentalViewSystem;
 
@@ -261,6 +262,12 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
               toothId={tooth.id}
               profundidadPalpacion={profundidadPalpacion}
               margenGingival={margenGingival}
+            />
+            
+            <ToothConditionMarkers 
+              toothId={tooth.id}
+              conditions={tooth.conditions || []}
+              position={position}
             />
           </>
         ) : (

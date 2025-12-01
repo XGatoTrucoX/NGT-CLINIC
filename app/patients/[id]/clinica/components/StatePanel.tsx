@@ -329,12 +329,18 @@ const StatePanel: React.FC<StatePanelProps> = ({
         toothId={effectiveSelectedTooth || 0}
         conditionType={conditionType}
         onSave={(positions) => {
+          const tooth = teethData.find(t => t.id === effectiveSelectedTooth);
+          const existingConditions = tooth?.conditions || [];
+          
+          // Filtrar condiciones existentes del mismo tipo
+          const filteredConditions = existingConditions.filter((c: any) => c.type !== conditionType);
+          
           const newState = {
             isAbsent: false,
             isImplant: false,
             isPontic: false,
             hasCarilla: false,
-            conditions: [{ type: conditionType, positions }]
+            conditions: [...filteredConditions, { type: conditionType, positions }]
           };
           onUpdateTooth(effectiveSelectedTooth!, newState);
           
