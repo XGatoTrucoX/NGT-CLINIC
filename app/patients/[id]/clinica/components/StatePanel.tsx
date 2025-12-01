@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/StatePanel.css';
+import ToothConditionModal from './ToothConditionModal';
 
 interface StatePanelProps {
   selectedTooth: number | null;
@@ -10,6 +11,7 @@ interface StatePanelProps {
   teethData: any[];
   onUpdateTooth: (toothId: number, newState: any) => void;
   onUpdateTeeth: (teethIds: number[], option: string) => void;
+  activeMode?: string;
 }
 
 const StatePanel: React.FC<StatePanelProps> = ({ 
@@ -18,9 +20,17 @@ const StatePanel: React.FC<StatePanelProps> = ({
   setSelectedTeeth, 
   teethData, 
   onUpdateTooth, 
-  onUpdateTeeth 
+  onUpdateTeeth,
+  activeMode = 'quickselect'
 }) => {
   const tooth = selectedTooth ? teethData.find(t => t.id === selectedTooth) : null;
+  const [showConditionModal, setShowConditionModal] = useState(false);
+  const [conditionType, setConditionType] = useState<'caries' | 'obturacion'>('caries');
+  
+  console.log('📊 StatePanel render - showConditionModal:', showConditionModal, 'selectedTooth:', selectedTooth, 'selectedTeeth:', selectedTeeth, 'activeMode:', activeMode);
+  
+  // Si hay dientes seleccionados pero no selectedTooth, usar el primero para el modal
+  const effectiveSelectedTooth = selectedTooth || (selectedTeeth.length === 1 ? selectedTeeth[0] : null);
 
   const getCurrentState = () => {
     if (!tooth) return null;
@@ -39,7 +49,21 @@ const StatePanel: React.FC<StatePanelProps> = ({
   };
 
   const applyState = (state: string) => {
-    if (!selectedTooth) return;
+    console.log('🔍 applyState llamado con:', state);
+    if (!effectiveSelectedTooth) {
+      console.log('❌ No hay diente seleccionado');
+      return;
+    }
+    
+    if (state === 'caries' || state === 'obturacion') {
+      console.log('🦷 Detectado caries/obturación, abriendo modal');
+      setConditionType(state as 'caries' | 'obturacion');
+      setShowConditionModal(true);
+      console.log('📊 Estado modal:', { conditionType: state, showModal: true });
+      return;
+    }
+    
+    console.log('⚙️ Aplicando estado normal:', state);
     
     const newState = {
       isAbsent: state === 'ausente',
@@ -49,7 +73,7 @@ const StatePanel: React.FC<StatePanelProps> = ({
       conditions: [] as any[]
     };
     
-    if (state === 'endodoncia' || state === 'caries' || state === 'obturacion' || state === 'fractura') {
+    if (state === 'endodoncia' || state === 'fractura') {
       newState.conditions = [{ type: state }];
     }
     
@@ -122,7 +146,10 @@ const StatePanel: React.FC<StatePanelProps> = ({
     return (
       <button 
         className={`state-button ${isActive ? 'active' : ''}`}
-        onClick={() => applyState(state)}
+        onClick={() => {
+          console.log('🔘 Botón presionado:', state, 'selectedTooth:', selectedTooth);
+          applyState(state);
+        }}
       >
         {icon && <span className="state-icon">{icon}</span>}
         {label}
@@ -133,7 +160,12 @@ const StatePanel: React.FC<StatePanelProps> = ({
   const applyToSelectedTeeth = (option: string) => {
     if (selectedTeeth.length === 0) return;
     
-    onUpdateTeeth(selectedTeeth, option);
+    if (option === 'caries' || option === 'obturacion') {
+      // Para selección múltiple, aplicar sin modal
+      onUpdateTeeth(selectedTeeth, option);
+    } else {
+      onUpdateTeeth(selectedTeeth, option);
+    }
     
     const optionName = option.charAt(0).toUpperCase() + option.slice(1);
     document.dispatchEvent(new CustomEvent('showConfirmation', {
@@ -165,7 +197,7 @@ const StatePanel: React.FC<StatePanelProps> = ({
   }, [selectedTeeth, setSelectedTeeth]);
   
   const handleClose = () => {
-    if (selectedTooth) {
+    if (effectiveSelectedTooth) {
       document.dispatchEvent(new CustomEvent('toothDeselect'));
     } else if (selectedTeeth.length > 0) {
       setSelectedTeeth([]);
@@ -246,14 +278,14 @@ const StatePanel: React.FC<StatePanelProps> = ({
            selectedTeeth.length > 0 ? `Selección múltiple (${selectedTeeth.length})` : 
            'Panel de estados'}
         </h3>
-        {(selectedTooth || selectedTeeth.length > 0) && (
+        {(effectiveSelectedTooth || selectedTeeth.length > 0) && (
           <button className="close-button" onClick={handleClose} title="Cerrar selección">
             ×
           </button>
         )}
       </div>
       
-      {selectedTooth ? (
+      {effectiveSelectedTooth ? (
         <>
           <div className="state-buttons">
             {renderStateButton('normal', 'Normal')}
@@ -290,6 +322,28 @@ const StatePanel: React.FC<StatePanelProps> = ({
       ) : (
         <p>Seleccione un diente o varios dientes para ver sus opciones.</p>
       )}
+      
+      <ToothConditionModal
+        isOpen={showConditionModal}
+        onClose={() => setShowConditionModal(false)}
+        toothId={effectiveSelectedTooth || 0}
+        conditionType={conditionType}
+        onSave={(positions) => {
+          const newState = {
+            isAbsent: false,
+            isImplant: false,
+            isPontic: false,
+            hasCarilla: false,
+            conditions: [{ type: conditionType, positions }]
+          };
+          onUpdateTooth(effectiveSelectedTooth!, newState);
+          
+          const stateName = conditionType.charAt(0).toUpperCase() + conditionType.slice(1);
+          document.dispatchEvent(new CustomEvent('showConfirmation', {
+            detail: { message: `${stateName} aplicada al diente ${effectiveSelectedTooth}` }
+          }));
+        }}
+      />
     </div>
   );
 };

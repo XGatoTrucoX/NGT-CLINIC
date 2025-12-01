@@ -71,7 +71,7 @@ const OdontogramaApp: React.FC = () => {
         return tooth;
       });
 
-      return applyStateToTooth(updatedTeethData, toothId, 'custom', true);
+      return updatedTeethData;
     });
   };
 
@@ -163,6 +163,7 @@ const OdontogramaApp: React.FC = () => {
                     teethData={teethData} 
                     onUpdateTooth={handleUpdateTooth}
                     onUpdateTeeth={handleUpdateTeeth}
+                    activeMode={activeMode}
                   />
                 </div>
               )}
@@ -206,6 +207,7 @@ const OdontogramaApp: React.FC = () => {
                   teethData={teethData} 
                   onUpdateTooth={handleUpdateTooth}
                   onUpdateTeeth={handleUpdateTeeth}
+                  activeMode={activeMode}
                 />
               </div>
             )}
@@ -280,6 +282,7 @@ const OdontogramaApp: React.FC = () => {
                   teethData={teethData} 
                   onUpdateTooth={handleUpdateTooth}
                   onUpdateTeeth={handleUpdateTeeth}
+                  activeMode={activeMode}
                 />
               </div>
             )}
@@ -322,6 +325,7 @@ const OdontogramaApp: React.FC = () => {
                   teethData={teethData} 
                   onUpdateTooth={handleUpdateTooth}
                   onUpdateTeeth={handleUpdateTeeth}
+                  activeMode={activeMode}
                 />
               </div>
             )}
