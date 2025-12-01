@@ -86,7 +86,7 @@ function ClinicaPageContent() {
           )}
 
           {tab === 'Odontograma' && (
-            <div style={{ width: '100%', height: '100vh', position: 'fixed', top: 0, left: 0, zIndex: 1000 }}>
+            <div className="w-full h-full">
               <OdontogramaApp />
             </div>
           )}

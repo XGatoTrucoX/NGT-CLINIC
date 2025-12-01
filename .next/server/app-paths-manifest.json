@@ -1,4 +1,5 @@
 {
+  "/not-found": "app/not-found.js",
   "/patients/[id]/clinica/page": "app/patients/[id]/clinica/page.js",
   "/patients/[id]/page": "app/patients/[id]/page.js"
 }

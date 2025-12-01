@@ -332,22 +332,12 @@ const OdontogramaApp: React.FC = () => {
 
   return (
     <div className="odontograma-app">
-      <header className="app-header">
-        <div className="header-content">
-          <button 
-            className="close-odontograma-btn"
-            onClick={() => window.history.back()}
-            title="Cerrar Odontograma"
-          >
-            ← Volver
-          </button>
-          <h1>Sistema de Gestión Dental</h1>
-        </div>
+      <div className="mb-4">
         <TabsNavigation 
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
-      </header>
+      </div>
       <main className="app-main">
         {renderContent()}
         <div className="fixed-components">
