@@ -1,6 +1,335 @@
-/*!********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./styles/Odontograma.css ***!
-  \********************************************************************************************************************************************************************************************************************************************************************/
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/patients/[id]/clinica/components/styles/OdontogramaApp.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************/
+.odontograma-app {
+  width: 100%;
+  height: 100vh;
+  background-color: #1a1f2c;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background-color: #1a1f2c;
+  border-bottom: 1px solid #2a3142;
+  padding: 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #2a3142;
+}
+
+.close-odontograma-btn {
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 20px;
+  transition: all 0.3s ease;
+}
+
+.close-odontograma-btn:hover {
+  background-color: #357abd;
+}
+
+.app-header h1 {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+  flex: 1;
+  text-align: center;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.main-layout {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1f2c;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.left-panel.expanded {
+  flex: 1;
+}
+
+.tooth-view-area {
+  flex: 1;
+  padding: 20px;
+  overflow: auto;
+  position: relative;
+}
+
+.view-menu-container {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.sidebar-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 50;
+}
+
+.right-panel {
+  width: 350px;
+  background-color: #2a3142;
+  border-left: 1px solid #3a4152;
+  padding: 20px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+.toggle-panel-button {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 200;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-panel-button:hover {
+  background-color: #357abd;
+  transform: scale(1.1);
+}
+
+.fixed-components {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.fixed-components > * {
+  pointer-events: auto;
+}
+
+.clean-detail-view {
+  background-color: #1a1f2c;
+  padding: 20px;
+}
+
+.main-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.tooth-detail-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .right-panel {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+  }
+  
+  .right-panel {
+    width: 100%;
+    height: 300px;
+    border-left: none;
+    border-top: 1px solid #3a4152;
+  }
+  
+  .toggle-panel-button {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/patients/[id]/clinica/components/styles/TabsNavigation.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************/
+.tabs-navigation {
+  background-color: #1a1f2c;
+  padding: 0;
+  border-bottom: 1px solid #2a3142;
+}
+
+.tabs-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+}
+
+.tab {
+  background: none;
+  border: none;
+  color: #aaa;
+  padding: 15px 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-bottom: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tab:hover {
+  color: white;
+  background-color: rgba(74, 144, 226, 0.1);
+}
+
+.tab.active {
+  color: white;
+  background-color: #2a3142;
+  border-bottom: 3px solid #4a90e2;
+}
+
+.tab-icon {
+  font-size: 18px;
+}
+
+.tab-label {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.examination-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4a90e2;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.label-icon {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .tabs-container {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .tab {
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+  
+  .examination-label {
+    font-size: 10px;
+  }
+}
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/patients/[id]/clinica/components/styles/MaterialIcons.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************/
+/* Material Icons fallback */
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fallback para iconos cuando no se carga Material Icons */
+.material-icons:before {
+  content: attr(data-icon);
+}
+
+/* Iconos específicos como fallback */
+.material-icons.description:before {
+  content: "📄";
+}
+
+.material-icons.grid_view:before {
+  content: "⚏";
+}
+
+.material-icons.biotech:before {
+  content: "🔬";
+}
+
+.material-icons.science:before {
+  content: "⚗️";
+}
+
+.material-icons.medical_services:before {
+  content: "🏥";
+}
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/patients/[id]/clinica/components/styles/Odontograma.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
 .odontograma-container {
   display: flex;
   flex-direction: column;
@@ -48,9 +377,8 @@
   margin-bottom: 5px;
 }
 
-/* Separación especial para los dientes incisales */
 .tooth-container.incisal-view {
-  margin: 0 6px; /* Separación de 6mm entre dientes incisales */
+  margin: 0 6px;
 }
 
 .upper-teeth-lingual, .lower-teeth-lingual {
@@ -80,18 +408,18 @@
 
 .tooth-container {
   position: relative;
-  margin: 0 3px; /* Separación de 3mm entre dientes bucales */
+  margin: 0 3px;
   cursor: pointer;
   transition: transform 0.2s;
-  transform: scale(0.85); /* Aumento del 15% respecto al tamaño reducido anterior */
+  transform: scale(0.85);
 }
 
 .tooth-container:hover {
-  transform: scale(0.9); /* Hover ligeramente más grande que el tamaño base */
+  transform: scale(0.9);
 }
 
 .tooth-container.selected {
-  transform: scale(0.95); /* Selección más grande que el hover */
+  transform: scale(0.95);
   z-index: 10;
 }
 
@@ -112,9 +440,9 @@
   border-bottom: 1px solid #3a4152;
   padding-bottom: 10px;
 }
-/*!**************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./styles/Tooth.css ***!
-  \**************************************************************************************************************************************************************************************************************************************************************/
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/patients/[id]/clinica/components/styles/Tooth.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************/
 .tooth-container {
   position: relative;
   width: 90px;
@@ -134,7 +462,6 @@
   height: 100px;
 }
 
-/* Estilo para el indicador de selección (check) */
 .tooth-selected-indicator {
   position: absolute;
   top: 50%;
@@ -156,7 +483,6 @@
   height: 20px;
 }
 
-/* Estilo para dientes seleccionados */
 .tooth-container.selected {
   position: relative;
   border-radius: 3px;
@@ -174,17 +500,14 @@
   transition: transform 0.2s ease-in-out;
 }
 
-/* Clase para aplicar el efecto espejo */
 .tooth-image.mirrored {
   transform: scaleX(-1);
 }
 
-/* Para la vista lingual, necesitamos invertir verticalmente la imagen */
 .lingual-view .tooth-image {
   transform: scaleY(-1);
 }
 
-/* Para la vista lingual con efecto espejo, necesitamos invertir horizontal y verticalmente */
 .lingual-view .tooth-image.mirrored {
   transform: scaleX(-1) scaleY(-1);
 }
@@ -217,12 +540,10 @@
   pointer-events: none;
 }
 
-/* También aplicamos el efecto espejo a las condiciones */
 .tooth-condition.mirrored {
   transform: scaleX(-1);
 }
 
-/* Para las condiciones en vista lingual */
 .lingual-view .tooth-condition {
   transform: scaleY(-1);
 }
@@ -231,7 +552,6 @@
   transform: scaleX(-1) scaleY(-1);
 }
 
-/* Estilo para dientes marcados para extracción */
 .tooth-container.to-be-extracted {
   outline: 2px dashed #ff0000;
   border-radius: 12px;
@@ -251,7 +571,6 @@
   }
 }
 
-/* Opcional: Agregar un indicador visual adicional */
 .tooth-container.to-be-extracted::before {
   content: "";
   position: absolute;
@@ -264,7 +583,6 @@
   border-radius: 12px;
 }
 
-/* Estilo para dientes ausentes */
 .tooth-container.absent-tooth {
   outline: 2px solid #3498db;
   border-radius: 12px;
@@ -287,7 +605,6 @@
   filter: grayscale(100%);
 }
 
-/* Estilos para los diferentes estados de los dientes */
 .tooth-container.has-carilla {
   outline: 2px solid #9b59b6;
   border-radius: 8px;
@@ -303,13 +620,11 @@
   border-radius: 8px;
 }
 
-/* Estilos para la vista endodóntica */
 .tooth-container.endo-view {
   background-color: rgba(52, 152, 219, 0.05);
   border-radius: 8px;
 }
 
-/* Indicadores para condiciones específicas */
 .crown-indicator {
   position: absolute;
   top: 5px;
@@ -332,7 +647,6 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos para errores de carga de imagen */
 .image-error-indicator {
   display: flex;
   flex-direction: column;
@@ -344,7 +658,6 @@
   color: #721c24;
 }
 
-/* Animación para dientes seleccionados */
 @keyframes selected-pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.7);
@@ -361,7 +674,6 @@
   animation: selected-pulse 2s infinite;
 }
 
-/* Tooltip para mostrar información al pasar el mouse */
 .tooth-container::after {
   content: attr(data-tooth-id);
   position: absolute;
@@ -383,411 +695,905 @@
 .tooth-container:hover::after {
   opacity: 1;
 }
-
-/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./styles/PerioLines.css ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************/
-.perio-lines-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* Para que no interfiera con los clics en el diente */
-  z-index: 10;
-}
-
-.perio-line {
-  position: absolute;
-  border-radius: 1px;
-}
-
-.profundidad-line {
-  background-color: #3498db; /* Azul para profundidad de palpación */
-}
-
-.margen-line {
-  background-color: #e74c3c; /* Rojo para margen gingival */
-}
-
-/* Animación para hacer las líneas más visibles */
-@keyframes pulse {
-  0% {
-    opacity: 0.7;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.7;
-  }
-}
-
-.perio-line.highlight {
-  animation: pulse 2s infinite;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-/*!*********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./styles/DateTimeline.css ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************/
-.date-timeline-container {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  z-index: 100;
-}
-
-.timeline-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #fff;
-  border: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.timeline-icon {
-  font-size: 20px;
-  color: #333;
-}
-
-.timeline-panel {
-  position: absolute;
-  bottom: 50px;
-  left: 0;
-  width: 300px;
-  background-color: #1e2433;
-  border: 1px solid #2a3446;
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/patients/[id]/clinica/components/styles/StatePanel.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************/
+.state-panel {
+  background-color: #2a3142;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
   color: white;
+  border: 2px solid #4a90e2;
+  max-height: 85vh;
+  overflow-y: auto;
 }
 
-.timeline-header {
-  padding: 10px;
+.panel-header {
   display: flex;
-  justify-content: flex-end;
-  border-bottom: 1px solid #eee;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #4a90e2;
+  padding-bottom: 10px;
 }
 
-.close-timeline {
+.close-button {
+  background-color: transparent;
+  border: none;
+  color: #ff5252;
+  font-size: 18px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  background-color: rgba(255, 82, 82, 0.2);
+}
+
+.teeth-selection-info {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #4a90e2;
+}
+
+.selected-teeth-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.selected-tooth-chip {
+  background-color: #4a90e2;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.quick-select-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #4a90e2;
+}
+
+.quick-select-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.quick-select-button {
+  padding: 12px 20px;
   background: none;
   border: none;
-  font-size: 20px;
+  color: #aaa;
+  font-size: 14px;
   cursor: pointer;
-  color: #666;
-}
-
-.timeline-content {
-  padding: 15px;
-}
-
-.timeline-navigation {
+  transition: all 0.3s;
+  border-bottom: 2px solid transparent;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  position: relative;
+  margin: 0 5px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.option-icon {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.option-label {
+  font-weight: 500;
+}
+
+.quick-select-button:hover:not(:disabled) {
+  color: white;
+  background-color: rgba(74, 144, 226, 0.1);
+  border-radius: 4px 4px 0 0;
+  border-bottom: 2px solid #4a90e2;
+}
+
+.quick-select-button.selected {
+  background-color: #4a90e2;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+}
+
+.quick-select-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.state-panel h3 {
+  margin-top: 0;
+  color: white;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #4a90e2;
+  padding-bottom: 10px;
   margin-bottom: 15px;
 }
 
-.nav-button {
-  width: 30px;
-  height: 30px;
-  background-color: #2196F3;
+.state-panel h4 {
+  color: white;
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.state-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.state-button {
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-bottom: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 0 5px;
+}
+
+.state-button:hover {
+  color: white;
+  background-color: rgba(74, 144, 226, 0.1);
+  border-radius: 4px 4px 0 0;
+}
+
+.state-button.active {
+  color: white;
+  background-color: #1a2030;
+  border-bottom: 3px solid #4a90e2;
+  border-radius: 4px 4px 0 0;
+}
+
+.state-icon {
+  font-size: 20px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.action-buttons {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #4a90e2;
+}
+
+.clear-selection-button {
+  background-color: #ff5252;
   color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.clear-selection-button:hover {
+  background-color: #ff1744;
+}
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/patients/[id]/clinica/components/styles/ViewMenu.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************/
+.view-menu {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  background-color: #2a3142;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.view-button {
+  background: none;
+  border: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 5px 0;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.2s;
+}
+
+.view-button:hover {
+  background-color: #3a4152;
+}
+
+.view-button.active {
+  background-color: #4a90e2;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.date-selector {
+.icon img {
+  max-width: 100%;
+  max-height: 100%;
+}
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/patients/[id]/clinica/components/styles/EndodonticModule.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+.endodontic-module {
+  width: 100%;
+  height: 100%;
+  background-color: #1a1f2c;
+  color: white;
+}
+
+.endo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #2a3142;
+}
+
+.endo-header h3 {
+  margin: 0;
+  color: white;
+}
+
+.endo-toggle {
+  background-color: #3a4152;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.endo-toggle:hover {
+  background-color: #4a90e2;
+}
+
+.endo-toggle.active {
+  background-color: #4a90e2;
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+}
+
+.endo-content {
+  display: flex;
+  height: calc(100vh - 200px);
+}
+
+.endo-odontograma {
+  flex: 1;
+  padding: 20px;
+}
+
+.endo-panel {
+  width: 350px;
+  background-color: #2a3142;
+  padding: 20px;
+  border-left: 1px solid #3a4152;
+  overflow-y: auto;
+}
+
+.endo-tests {
+  margin-bottom: 30px;
+}
+
+.endo-tests h4 {
+  color: white;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.tests-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.test-item {
+  background-color: #3a4152;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.test-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.test-icon {
+  font-size: 20px;
+}
+
+.test-name {
+  font-weight: 500;
+  color: white;
+}
+
+.test-results {
+  display: flex;
+  gap: 10px;
+}
+
+.result-button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.result-button.positive {
+  background-color: #4caf50;
+  color: white;
+}
+
+.result-button.negative {
+  background-color: #f44336;
+  color: white;
+}
+
+.result-button:hover {
+  transform: scale(1.05);
+}
+
+.result-button.active {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+.endo-diagnosis {
+  background-color: #3a4152;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.endo-diagnosis h4 {
+  color: white;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.diagnosis-textarea {
+  width: 100%;
+  min-height: 100px;
+  background-color: #2a3142;
+  border: 1px solid #4a5568;
+  border-radius: 4px;
+  padding: 10px;
+  color: white;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.diagnosis-textarea::-moz-placeholder {
+  color: #aaa;
+}
+
+.diagnosis-textarea::placeholder {
+  color: #aaa;
+}
+
+.save-diagnosis-button {
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.save-diagnosis-button:hover {
+  background-color: #357abd;
+}
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/patients/[id]/clinica/components/styles/PeriodontalModule.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************/
+.periodontal-module {
+  width: 100%;
+  height: 100%;
+  background-color: #2a3142;
+  color: white;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.perio-header {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #4a5568;
+  padding-bottom: 15px;
+}
+
+.perio-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 20px;
+}
+
+.perio-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.perio-measurements {
+  background-color: #3a4152;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.perio-measurements h4 {
+  color: white;
+  margin-bottom: 20px;
+  font-size: 18px;
+  border-bottom: 1px solid #4a5568;
+  padding-bottom: 10px;
+}
+
+.measurement-group {
+  margin-bottom: 20px;
+}
+
+.measurement-group label {
+  display: block;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.measurement-inputs {
+  display: flex;
+  gap: 15px;
+}
+
+.measurement-input {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.date-selector span {
+.measurement-input label {
   font-size: 12px;
-  color: #666;
+  color: #aaa;
   margin-bottom: 5px;
+  text-transform: uppercase;
 }
 
-.selected-date {
-  font-weight: 500;
-  color: #333;
+.measurement-input input {
+  width: 60px;
+  padding: 8px;
+  background-color: #2a3142;
+  border: 1px solid #4a5568;
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+  font-size: 14px;
 }
 
-.timeline-dates {
+.measurement-input input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.measurement-group select {
+  width: 100%;
+  padding: 10px;
+  background-color: #2a3142;
+  border: 1px solid #4a5568;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+}
+
+.measurement-group select:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.perio-indicators {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.date-item {
-  padding: 10px 15px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  color: white;
-}
-
-.date-item:hover {
-  background-color: #2a3446;
-}
-
-.date-item.active {
-  background-color: #2196F3;
-  color: white;
-}
-
-.date-timeline {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 100;
-}
-
-.date-button {
+.perio-indicators label {
   display: flex;
   align-items: center;
-  background-color: #1e2433;
+  gap: 10px;
   color: white;
-  border: 1px solid #2a3446;
-  border-radius: 20px;
-  padding: 8px 15px;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s;
 }
 
-.date-icon {
-  margin-right: 8px;
+.perio-indicators input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #4a90e2;
 }
 
-.date-panel {
-  background-color: #1e2433;
+.perio-notes {
+  background-color: #3a4152;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.perio-notes h4 {
+  color: white;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.notes-textarea {
+  width: 100%;
+  min-height: 80px;
+  background-color: #2a3142;
+  border: 1px solid #4a5568;
   border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  width: 200px;
-  overflow: hidden;
-}
-
-.date-panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 15px;
-  border-bottom: 1px solid #2a3446;
-  background-color: #1e2433;
+  padding: 10px;
   color: white;
+  font-family: inherit;
+  resize: vertical;
   font-size: 14px;
 }
 
-.close-button {
-  background: none;
-  border: none;
+.notes-textarea::-moz-placeholder {
   color: #aaa;
-  font-size: 18px;
+}
+
+.notes-textarea::placeholder {
+  color: #aaa;
+}
+
+.notes-textarea:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.save-notes-button {
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
   cursor: pointer;
-  padding: 0;
+  margin-top: 10px;
+  width: 100%;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.save-notes-button:hover {
+  background-color: #357abd;
+}
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/patients/[id]/clinica/components/styles/Sidebar.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************/
+.sidebar {
+  background-color: #2a3142;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-button {
+  background-color: #3a4152;
+  border: 1px solid #4a5162;
+  color: #ccc;
+  padding: 15px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.sidebar-button:hover {
+  background-color: #4a5162;
+  border-color: #5a6172;
+  color: white;
+}
+
+.sidebar-button.active {
+  background-color: #4a90e2;
+  border-color: #4a90e2;
+  color: white;
+}
+
+.sidebar-button .icon {
   width: 24px;
   height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
 }
 
-.close-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.icon-endo::before {
+  content: "🔬";
+  font-size: 18px;
+}
+
+.icon-periodoncia::before {
+  content: "🦷";
+  font-size: 18px;
+}
+
+.icon-dental::before {
+  content: "⚕️";
+  font-size: 18px;
+}
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/patients/[id]/clinica/components/styles/ConfirmationMessage.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
+.confirmation-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4caf50;
   color: white;
-}
-
-.date-list {
-  max-height: 200px;
-  overflow-y: auto;
-  background-color: #1e2433;
-}
-
-.date-option {
-  width: 100%;
-  text-align: left;
-  padding: 10px 12px;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-bottom: 1px solid #2a3446;
-}
-
-.date-option:hover {
-  background-color: #2a3446;
-}
-
-.date-option.active {
-  background-color: #4a90e2;
-}
-/*!***********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./styles/PerioExamPanel.css ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************/
-.perio-exam-panel {
-  width: 320px;
-  background-color: #fff;
+  padding: 15px 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  color: #333;
-  overflow: hidden;
-  position: absolute;
-  left: 20px; /* Posicionado a la izquierda como solicitaste */
-  top: 80px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   z-index: 1000;
+  animation: slideIn 0.3s ease-out;
 }
 
-.panel-header {
-  background-color: #2196F3;
-  color: white;
-  padding: 12px 15px;
+.confirmation-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
-.panel-header h3 {
-  margin: 0;
-  font-size: 16px;
+.confirmation-icon {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.confirmation-text {
+  font-size: 14px;
   font-weight: 500;
 }
 
-.close-button {
-  background: none;
-  border: none;
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./app/patients/[id]/clinica/components/styles/ToothDetailView.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
+.tooth-detail-view {
+  background-color: #2a3142;
+  border-radius: 8px;
+  padding: 20px;
   color: white;
-  font-size: 20px;
-  cursor: pointer;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.measurements-grid {
-  padding: 15px;
-  background-color: #f5f5f5;
-}
-
-.measurement-row {
+.detail-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #4a5568;
+  padding-bottom: 15px;
 }
 
-.measurement-cell {
+.detail-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+}
+
+.close-detail-btn {
+  background: none;
+  border: none;
+  color: #ff5252;
+  font-size: 24px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-detail-btn:hover {
+  background-color: rgba(255, 82, 82, 0.2);
+}
+
+.detail-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #4a5568;
+}
+
+.detail-tab {
+  background: none;
+  border: none;
+  color: #aaa;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.detail-tab:hover {
+  color: white;
+  background-color: rgba(74, 144, 226, 0.1);
+}
+
+.detail-tab.active {
+  color: white;
+  background-color: #3a4152;
+  border-bottom: 3px solid #4a90e2;
+}
+
+.detail-content {
+  min-height: 300px;
+}
+
+.detail-section {
+  background-color: #3a4152;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.detail-section h4 {
+  margin: 0 0 15px 0;
+  color: white;
+  font-size: 18px;
+  border-bottom: 1px solid #4a5568;
+  padding-bottom: 10px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.info-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 30%;
-}
-
-.value {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-.label {
-  font-size: 12px;
-  color: #666;
-  text-align: center;
-}
-
-.perio-indicators-section {
-  padding: 15px;
-  border-top: 1px solid #eee;
-}
-
-.perio-indicators-section h4 {
-  margin: 0 0 10px 0;
-  font-size: 14px;
-  color: #2196F3;
-  font-weight: 500;
-}
-
-.depth-buttons {
-  display: flex;
-  flex-wrap: wrap;
   gap: 5px;
 }
 
-.depth-buttons button {
-  width: 30px;
-  height: 30px;
-  border: 1px solid #ddd;
-  background-color: white;
-  border-radius: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+.info-item label {
+  font-weight: 500;
+  color: #aaa;
+  font-size: 14px;
 }
 
-.depth-buttons button.active {
-  background-color: #2196F3;
+.info-item span {
   color: white;
-  border-color: #2196F3;
+  font-size: 16px;
 }
 
-.indicators-row {
+.treatments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.treatment-item {
+  background-color: #2a3142;
+  border-radius: 4px;
+  padding: 12px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.indicator-button {
-  flex: 1;
-  padding: 8px;
-  margin: 0 5px;
-  border: 1px solid #ddd;
-  background-color: white;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
-  font-size: 13px;
-}
-
-.indicator-button.active {
-  background-color: #2196F3;
+.treatment-type {
   color: white;
-  border-color: #2196F3;
-}
-
-.panel-footer {
-  padding: 15px;
-  border-top: 1px solid #eee;
-  display: flex;
-  justify-content: center;
-}
-
-.save-button {
-  background-color: #2196F3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  cursor: pointer;
   font-weight: 500;
 }
 
-.save-button:hover {
-  background-color: #1976D2;
+.treatment-date {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.notes-textarea {
+  width: 100%;
+  background-color: #2a3142;
+  border: 1px solid #4a5568;
+  border-radius: 4px;
+  padding: 12px;
+  color: white;
+  font-family: inherit;
+  resize: vertical;
+  margin-bottom: 15px;
+}
+
+.notes-textarea::-moz-placeholder {
+  color: #aaa;
+}
+
+.notes-textarea::placeholder {
+  color: #aaa;
+}
+
+.notes-textarea:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.save-notes-btn {
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.save-notes-btn:hover {
+  background-color: #357abd;
 }

@@ -1,0 +1,176 @@
+.periodontal-module {
+  width: 100%;
+  height: 100%;
+  background-color: #2a3142;
+  color: white;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.perio-header {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #4a5568;
+  padding-bottom: 15px;
+}
+
+.perio-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 20px;
+}
+
+.perio-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.perio-measurements {
+  background-color: #3a4152;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.perio-measurements h4 {
+  color: white;
+  margin-bottom: 20px;
+  font-size: 18px;
+  border-bottom: 1px solid #4a5568;
+  padding-bottom: 10px;
+}
+
+.measurement-group {
+  margin-bottom: 20px;
+}
+
+.measurement-group label {
+  display: block;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.measurement-inputs {
+  display: flex;
+  gap: 15px;
+}
+
+.measurement-input {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.measurement-input label {
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.measurement-input input {
+  width: 60px;
+  padding: 8px;
+  background-color: #2a3142;
+  border: 1px solid #4a5568;
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+}
+
+.measurement-input input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.measurement-group select {
+  width: 100%;
+  padding: 10px;
+  background-color: #2a3142;
+  border: 1px solid #4a5568;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+}
+
+.measurement-group select:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.perio-indicators {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.perio-indicators label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.perio-indicators input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #4a90e2;
+}
+
+.perio-notes {
+  background-color: #3a4152;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.perio-notes h4 {
+  color: white;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.notes-textarea {
+  width: 100%;
+  min-height: 80px;
+  background-color: #2a3142;
+  border: 1px solid #4a5568;
+  border-radius: 4px;
+  padding: 10px;
+  color: white;
+  font-family: inherit;
+  resize: vertical;
+  font-size: 14px;
+}
+
+.notes-textarea::placeholder {
+  color: #aaa;
+}
+
+.notes-textarea:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.save-notes-button {
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.save-notes-button:hover {
+  background-color: #357abd;
+}

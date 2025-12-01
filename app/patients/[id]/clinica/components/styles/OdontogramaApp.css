@@ -1,0 +1,186 @@
+.odontograma-app {
+  width: 100%;
+  height: 100vh;
+  background-color: #1a1f2c;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background-color: #1a1f2c;
+  border-bottom: 1px solid #2a3142;
+  padding: 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #2a3142;
+}
+
+.close-odontograma-btn {
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 20px;
+  transition: all 0.3s ease;
+}
+
+.close-odontograma-btn:hover {
+  background-color: #357abd;
+}
+
+.app-header h1 {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+  flex: 1;
+  text-align: center;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.main-layout {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1f2c;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.left-panel.expanded {
+  flex: 1;
+}
+
+.tooth-view-area {
+  flex: 1;
+  padding: 20px;
+  overflow: auto;
+  position: relative;
+}
+
+.view-menu-container {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.sidebar-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 50;
+}
+
+.right-panel {
+  width: 350px;
+  background-color: #2a3142;
+  border-left: 1px solid #3a4152;
+  padding: 20px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+.toggle-panel-button {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 200;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-panel-button:hover {
+  background-color: #357abd;
+  transform: scale(1.1);
+}
+
+.fixed-components {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.fixed-components > * {
+  pointer-events: auto;
+}
+
+.clean-detail-view {
+  background-color: #1a1f2c;
+  padding: 20px;
+}
+
+.main-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.tooth-detail-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .right-panel {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+  }
+  
+  .right-panel {
+    width: 100%;
+    height: 300px;
+    border-left: none;
+    border-top: 1px solid #3a4152;
+  }
+  
+  .toggle-panel-button {
+    right: 20px;
+    bottom: 20px;
+  }
+}

@@ -1,0 +1,61 @@
+.sidebar {
+  background-color: #2a3142;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-button {
+  background-color: #3a4152;
+  border: 1px solid #4a5162;
+  color: #ccc;
+  padding: 15px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.sidebar-button:hover {
+  background-color: #4a5162;
+  border-color: #5a6172;
+  color: white;
+}
+
+.sidebar-button.active {
+  background-color: #4a90e2;
+  border-color: #4a90e2;
+  color: white;
+}
+
+.sidebar-button .icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-endo::before {
+  content: "🔬";
+  font-size: 18px;
+}
+
+.icon-periodoncia::before {
+  content: "🦷";
+  font-size: 18px;
+}
+
+.icon-dental::before {
+  content: "⚕️";
+  font-size: 18px;
+}

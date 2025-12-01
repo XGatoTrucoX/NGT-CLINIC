@@ -1,0 +1,39 @@
+.confirmation-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.confirmation-icon {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.confirmation-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

@@ -1,4 +1,4 @@
-// File: D:\Proyectos\NGT-CLINIC-sin-base-de-datos\app\patients\[id]\clinica\page.tsx
+// File: D:\Proyectos\NGT-CLINIC\app\patients\[id]\clinica\page.tsx
 import * as entry from '../../../../../../app/patients/[id]/clinica/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

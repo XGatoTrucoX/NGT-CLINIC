@@ -10,8 +10,7 @@ import FichaFiliacion from '../../../../components/FichaFiliacion';
 import DatosFiscales from '../../../../components/DatosFiscales';
 import SidebarPaciente from '../../../../components/SidebarPaciente';
 
-import Odontograma from '@/components/Odontograma'; // ✅ Usando alias
-import '@/styles/Odontograma.css'; // ✅ Estilo aplicado
+import OdontogramaApp from './components/OdontogramaApp';
 
 export default function ClinicaPage() {
   return (
@@ -87,35 +86,8 @@ function ClinicaPageContent() {
           )}
 
           {tab === 'Odontograma' && (
-            <div className="space-y-4">
-              <h2 className="text-2xl font-bold">Odontograma</h2>
-
-              {/* ✅ Selector de vista */}
-              <div className="flex gap-4">
-                <button
-                  onClick={() => setView('full')}
-                  className={`px-4 py-2 rounded ${view === 'full' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
-                >
-                  Vista Completa
-                </button>
-                <button
-                  onClick={() => setView('upper')}
-                  className={`px-4 py-2 rounded ${view === 'upper' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
-                >
-                  Superior
-                </button>
-                <button
-                  onClick={() => setView('lower')}
-                  className={`px-4 py-2 rounded ${view === 'lower' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
-                >
-                  Inferior
-                </button>
-              </div>
-
-              {/* ✅ Componente Odontograma */}
-              <div className="overflow-auto max-h-[80vh]">
-                <Odontograma activeMode="quickselect" />
-              </div>
+            <div style={{ width: '100%', height: '100vh', position: 'fixed', top: 0, left: 0, zIndex: 1000 }}>
+              <OdontogramaApp />
             </div>
           )}
         </div>

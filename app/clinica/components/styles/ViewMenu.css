@@ -1,0 +1,38 @@
+.view-menu {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background-color: #2a3142;
+  border-radius: 8px;
+  justify-content: center;
+}
+
+.view-button {
+  background-color: #3a4152;
+  border: 1px solid #4a5162;
+  color: #ccc;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-button:hover {
+  background-color: #4a5162;
+  border-color: #5a6172;
+  color: white;
+}
+
+.view-button .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-button .icon svg {
+  width: 24px;
+  height: 24px;
+}
