@@ -18,10 +18,10 @@
       "static/css/app/patients/[id]/page.css",
       "static/chunks/app/patients/[id]/page.js"
     ],
-    "/not-found": [
+    "/gastos/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
+      "static/chunks/app/gastos/page.js"
     ]
   }
 }

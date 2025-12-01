@@ -128,19 +128,19 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
       imagePath = `${basePath}${position}.implant.${imageToothId}.png${timestamp}`;
       console.log('Generando ruta para implante:', imagePath);
     } else if (tooth.isPontic) {
-      imagePath = `${basePath}${position}.pontics.${imageToothId}.png${timestamp}`;
+      imagePath = position === 'incisal' ? `${basePath}${position}.tooth.${imageToothId}.png${timestamp}` : `${basePath}${position}.pontics.${imageToothId}.png${timestamp}`;
       console.log('Generando ruta para póntico:', imagePath);
     } else if (tooth.hasWear) {
       imagePath = `${basePath}${position}.dental.wear.${imageToothId}.png${timestamp}`;
       console.log('Generando ruta para desgaste:', imagePath);
     } else if (tooth.hasCarilla) {
-      imagePath = `${basePath}${position}.carilla.${imageToothId}.png${timestamp}`;
+      imagePath = `${basePath}${position}.tooth.${imageToothId}.png${timestamp}`;
     } else if (tooth.hasNecrosis) {
       imagePath = `${basePath}${position}.necrosis.${imageToothId}.png${timestamp}`;
     } else if (tooth.hasLesionPeriapical) {
       imagePath = `${basePath}${position}.lesion.periapical.${imageToothId}.png${timestamp}`;
     } else if (hasCondition('corona')) {
-      imagePath = `${basePath}${position}.corona.${imageToothId}.png${timestamp}`;
+      imagePath = `${basePath}${position}.tooth.${imageToothId}.png${timestamp}`;
     } else if (hasCondition('endodoncia')) {
       imagePath = `${basePath}${position}.endodoncia.${imageToothId}.png${timestamp}`;
     } else {

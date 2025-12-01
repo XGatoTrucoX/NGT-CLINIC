@@ -164,11 +164,11 @@ const Odontograma: React.FC<OdontogramaProps> = ({
                     } else if (option === 'implante' || option === 'normal') {
                       newSrc = `/images/teeth/incisal/incisal.tooth.${imageToothId}.png`;
                     } else if (option === 'puente') {
-                      newSrc += `pontics.${imageToothId}.png`;
+                      newSrc += `tooth.${imageToothId}.png`;
                     } else if (option === 'desgaste') {
                       newSrc += `dental.wear.${imageToothId}.png`;
                     } else if (option === 'corona') {
-                      newSrc += `carilla.${imageToothId}.png`;
+                      newSrc += `tooth.${imageToothId}.png`;
                     } else {
                       newSrc += `tooth.${imageToothId}.png`;
                     }
@@ -180,7 +180,7 @@ const Odontograma: React.FC<OdontogramaProps> = ({
                     } else if (option === 'desgaste') {
                       newSrc += `dental.wear.${imageToothId}.png`;
                     } else if (option === 'corona') {
-                      newSrc += `carilla.${imageToothId}.png`;
+                      newSrc += `tooth.${imageToothId}.png`;
                     } else if (option === 'ausente') {
                       newSrc += `${imageToothId}.png`;
                     } else {

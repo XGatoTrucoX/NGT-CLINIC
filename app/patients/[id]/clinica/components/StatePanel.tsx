@@ -82,11 +82,11 @@ const StatePanel: React.FC<StatePanelProps> = ({
           if (state === 'implante') {
             newSrc += `implant.${imageToothId}.png`;
           } else if (state === 'puente') {
-            newSrc += `pontics.${imageToothId}.png`;
+            newSrc += position === 'incisal' ? `tooth.${imageToothId}.png` : `pontics.${imageToothId}.png`;
           } else if (state === 'desgaste') {
             newSrc += `dental.wear.${imageToothId}.png`;
           } else if (state === 'corona') {
-            newSrc += `carilla.${imageToothId}.png`;
+            newSrc += `tooth.${imageToothId}.png`;
           } else if (state === 'ausente') {
             newSrc += `${imageToothId}.png`;
           } else {
