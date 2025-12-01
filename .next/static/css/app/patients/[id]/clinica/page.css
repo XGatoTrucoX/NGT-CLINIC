@@ -914,7 +914,8 @@
   background-color: #2a3142;
   border-radius: 8px;
   padding: 20px;
-  max-width: 800px;
+  max-width: 1200px;
+  width: 90vw;
   max-height: 90vh;
   overflow-y: auto;
   color: white;
@@ -953,10 +954,15 @@
 }
 
 .tooth-views {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
   gap: 20px;
   margin-bottom: 20px;
+  justify-content: center;
+}
+
+.tooth-view-section {
+  flex: 1;
+  min-width: 250px;
 }
 
 .tooth-view-section h4 {
