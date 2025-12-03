@@ -11,10 +11,10 @@ interface TabsNavigationProps {
 
 const TabsNavigation: React.FC<TabsNavigationProps> = ({ activeTab, setActiveTab }) => {
   const tabs = [
-    { id: 'general', label: 'General', icon: 'description' },
-    { id: 'quickselect', label: 'Selección Rápida', icon: 'grid_view' },
-    { id: 'perio', label: 'Periodontal', icon: 'biotech' },
-    { id: 'endo', label: 'Endodoncia', icon: 'science' }
+    { id: 'general', label: 'General' },
+    { id: 'quickselect', label: 'Selección Rápida' },
+    { id: 'perio', label: 'Periodontal' },
+    { id: 'endo', label: 'Endodoncia' }
   ];
 
   return (
@@ -27,7 +27,6 @@ const TabsNavigation: React.FC<TabsNavigationProps> = ({ activeTab, setActiveTab
               className={`tab ${activeTab === tab.id ? 'active' : ''}`}
               onClick={() => setActiveTab(tab.id)}
             >
-              <span className="tab-icon material-icons">{tab.icon}</span>
               <span className="tab-label">{tab.label}</span>
             </button>
           ))}

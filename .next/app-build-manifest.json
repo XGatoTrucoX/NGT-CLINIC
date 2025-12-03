@@ -1,16 +1,25 @@
 {
   "pages": {
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
+    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/patients/[id]/clinica/page": [
+    "/appointments/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/patients/[id]/clinica/page.css",
-      "static/chunks/app/patients/[id]/clinica/page.js"
+      "static/chunks/app/appointments/page.js"
+    ],
+    "/patients/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/patients/page.js"
     ],
     "/patients/[id]/page": [
       "static/chunks/webpack.js",
@@ -18,10 +27,11 @@
       "static/css/app/patients/[id]/page.css",
       "static/chunks/app/patients/[id]/page.js"
     ],
-    "/gastos/page": [
+    "/patients/[id]/clinica/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/gastos/page.js"
+      "static/css/app/patients/[id]/clinica/page.css",
+      "static/chunks/app/patients/[id]/clinica/page.js"
     ]
   }
 }

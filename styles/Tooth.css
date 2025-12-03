@@ -213,6 +213,110 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
+/* Indicadores para datos periodontales */
+.furcation-indicator {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  width: 12px;
+  height: 12px;
+  background-color: #ff9800;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: bold;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.mobility-indicator {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 12px;
+  height: 12px;
+  background-color: #2196f3;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: bold;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.endo-test-indicator {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: bold;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Overlays para mostrar imágenes sobre el diente */
+.furcation-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.furcation-overlay-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.8;
+}
+
+.mobility-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.mobility-overlay-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.7;
+}
+
+.endo-test-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.endo-test-overlay-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.6;
+}
+
 /* Estilos para errores de carga de imagen */
 .image-error-indicator {
   display: flex;
@@ -263,4 +367,21 @@
 
 .tooth-container:hover::after {
   opacity: 1;
+}
+
+/* Estilos responsivos para indicadores */
+@media (max-width: 768px) {
+  .furcation-indicator,
+  .mobility-indicator,
+  .endo-test-indicator {
+    width: 10px;
+    height: 10px;
+    font-size: 7px;
+  }
+  
+  .furcation-overlay-image,
+  .mobility-overlay-image,
+  .endo-test-overlay-image {
+    opacity: 0.5;
+  }
 }

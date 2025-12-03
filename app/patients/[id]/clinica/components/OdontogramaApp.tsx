@@ -219,7 +219,7 @@ const OdontogramaApp: React.FC = () => {
             <div className={`left-panel ${!showRightPanel ? 'expanded' : ''}`}>
               <div className="tooth-view-area">
                 <Odontograma 
-                  activeMode={activeMode} 
+                  activeMode="perio" 
                   selectedTooth={selectedTooth} 
                   teethData={teethData} 
                   selectedTeeth={selectedTeeth}

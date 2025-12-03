@@ -25,6 +25,9 @@ const PeriodontalModule = ({ selectedTooth, teethData }) => {
   const [furcacion, setFurcacion] = useState(0); // 0, 1, 2, 3
   const [movilidad, setMovilidad] = useState(0); // 0, 1, 2, 3
   
+  // Estados para endodoncia
+  const [endoTest, setEndoTest] = useState(null); // 'cold', 'heat', 'electricity', 'palpation', 'percussion'
+  
   // Estado para mostrar panel detallado
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [activeMeasurement, setActiveMeasurement] = useState(null);
@@ -45,6 +48,7 @@ const PeriodontalModule = ({ selectedTooth, teethData }) => {
     setSarro(false);
     setFurcacion(0);
     setMovilidad(0);
+    setEndoTest(null);
     setShowDetailPanel(false);
     setActiveMeasurement(null);
   }, [selectedTooth]);
@@ -168,6 +172,55 @@ const PeriodontalModule = ({ selectedTooth, teethData }) => {
         value: value
       }
     }));
+    
+    // Actualizar los datos del diente para persistir los cambios
+    if (selectedTooth) {
+      const perioData = {
+        profundidadPalpacion: profundidadPalpacion,
+        margenGingival: margenGingival,
+        furcacion: furcacion,
+        movilidad: value,
+        endoTest: endoTest
+      };
+      
+      document.dispatchEvent(new CustomEvent('updateToothPerioData', {
+        detail: {
+          toothId: selectedTooth,
+          perioData: perioData
+        }
+      }));
+    }
+  };
+  
+  // Función para establecer el test endodóntico
+  const handleSetEndoTest = (testType) => {
+    setEndoTest(testType);
+    // Disparar evento para actualizar la visualización en el diente
+    document.dispatchEvent(new CustomEvent('perioMeasurementUpdate', {
+      detail: { 
+        toothId: selectedTooth,
+        type: 'endoTest',
+        value: testType
+      }
+    }));
+    
+    // Actualizar los datos del diente para persistir los cambios
+    if (selectedTooth) {
+      const perioData = {
+        profundidadPalpacion: profundidadPalpacion,
+        margenGingival: margenGingival,
+        furcacion: furcacion,
+        movilidad: movilidad,
+        endoTest: testType
+      };
+      
+      document.dispatchEvent(new CustomEvent('updateToothPerioData', {
+        detail: {
+          toothId: selectedTooth,
+          perioData: perioData
+        }
+      }));
+    }
   };
   
   // Función para establecer el valor de un indicador
@@ -354,15 +407,15 @@ const PeriodontalModule = ({ selectedTooth, teethData }) => {
         <h3>FURCACIÓN</h3>
         <div className="furcation-grid">
           <button className={furcacion === 1 ? 'active' : ''} onClick={() => handleSetFurcacion(1)}>
-            <span className="furcation-icon">^</span>
+            <img src="/images/teeth/furcacion/stage-1.png" alt="Etapa 1" className="furcation-image" />
             <span>Etapa 1</span>
           </button>
           <button className={furcacion === 2 ? 'active' : ''} onClick={() => handleSetFurcacion(2)}>
-            <span className="furcation-icon">^</span>
+            <img src="/images/teeth/furcacion/stage-2.png" alt="Etapa 2" className="furcation-image" />
             <span>Etapa 2</span>
           </button>
           <button className={furcacion === 3 ? 'active' : ''} onClick={() => handleSetFurcacion(3)}>
-            <span className="furcation-icon">^</span>
+            <img src="/images/teeth/furcacion/stage-3.png" alt="Etapa 3" className="furcation-image" />
             <span>Etapa 3</span>
           </button>
         </div>
@@ -373,16 +426,43 @@ const PeriodontalModule = ({ selectedTooth, teethData }) => {
         <h3>MOVILIDAD DENTAL</h3>
         <div className="mobility-grid">
           <button className={movilidad === 1 ? 'active' : ''} onClick={() => handleSetMovilidad(1)}>
-            <span className="mobility-icon">&lt; &gt;</span>
+            <img src="/images/teeth/movilidad dental/class 1.png" alt="Clase 1" className="mobility-image" />
             <span>Clase 1</span>
           </button>
           <button className={movilidad === 2 ? 'active' : ''} onClick={() => handleSetMovilidad(2)}>
-            <span className="mobility-icon">&lt;=&gt;</span>
+            <img src="/images/teeth/movilidad dental/class 2.png" alt="Clase 2" className="mobility-image" />
             <span>Clase 2</span>
           </button>
           <button className={movilidad === 3 ? 'active' : ''} onClick={() => handleSetMovilidad(3)}>
-            <span className="mobility-icon">&lt;==&gt;</span>
+            <img src="/images/teeth/movilidad dental/class 3.png" alt="Clase 3" className="mobility-image" />
             <span>Clase 3</span>
+          </button>
+        </div>
+      </div>
+      
+      {/* Tests Endodónticos */}
+      <div className="section">
+        <h3>TESTS ENDODÓNTICOS</h3>
+        <div className="endo-tests-grid">
+          <button className={endoTest === 'cold' ? 'active' : ''} onClick={() => handleSetEndoTest('cold')}>
+            <img src="/images/teeth/endodoncia/cold.png" alt="Frío" className="endo-test-image" />
+            <span>Frío</span>
+          </button>
+          <button className={endoTest === 'heat' ? 'active' : ''} onClick={() => handleSetEndoTest('heat')}>
+            <img src="/images/teeth/endodoncia/heat.png" alt="Calor" className="endo-test-image" />
+            <span>Calor</span>
+          </button>
+          <button className={endoTest === 'electricity' ? 'active' : ''} onClick={() => handleSetEndoTest('electricity')}>
+            <img src="/images/teeth/endodoncia/electricity.png" alt="Electricidad" className="endo-test-image" />
+            <span>Electricidad</span>
+          </button>
+          <button className={endoTest === 'palpation' ? 'active' : ''} onClick={() => handleSetEndoTest('palpation')}>
+            <img src="/images/teeth/endodoncia/palpation.png" alt="Palpación" className="endo-test-image" />
+            <span>Palpación</span>
+          </button>
+          <button className={endoTest === 'percussion' ? 'active' : ''} onClick={() => handleSetEndoTest('percussion')}>
+            <img src="/images/teeth/endodoncia/percussion.png" alt="Percusión" className="endo-test-image" />
+            <span>Percusión</span>
           </button>
         </div>
       </div>

@@ -18,6 +18,9 @@ const Tooth = ({ tooth, isSelected, onSelect, activeMode }) => {
   // Estados para valores periodontales
   const [profundidadPalpacion, setProfundidadPalpacion] = useState(tooth.perioData?.profundidadPalpacion || 0);
   const [margenGingival, setMargenGingival] = useState(tooth.perioData?.margenGingival || 0);
+  const [furcacion, setFurcacion] = useState(tooth.perioData?.furcacion || 0);
+  const [movilidad, setMovilidad] = useState(tooth.perioData?.movilidad || 0);
+  const [endoTest, setEndoTest] = useState(tooth.perioData?.endoTest || null);
   
   // Escuchar eventos de cambio de modo endodóntico
   useEffect(() => {
@@ -42,6 +45,12 @@ const Tooth = ({ tooth, isSelected, onSelect, activeMode }) => {
           setProfundidadPalpacion(value);
         } else if (type === 'margen') {
           setMargenGingival(value);
+        } else if (type === 'furcacion') {
+          setFurcacion(value);
+        } else if (type === 'movilidad') {
+          setMovilidad(value);
+        } else if (type === 'endoTest') {
+          setEndoTest(value);
         }
       }
     };
@@ -75,10 +84,16 @@ const Tooth = ({ tooth, isSelected, onSelect, activeMode }) => {
     if (tooth.perioData) {
       setProfundidadPalpacion(tooth.perioData.profundidadPalpacion || 0);
       setMargenGingival(tooth.perioData.margenGingival || 0);
+      setFurcacion(tooth.perioData.furcacion || 0);
+      setMovilidad(tooth.perioData.movilidad || 0);
+      setEndoTest(tooth.perioData.endoTest || null);
     } else {
       // Reiniciar valores si no hay datos
       setProfundidadPalpacion(0);
       setMargenGingival(0);
+      setFurcacion(0);
+      setMovilidad(0);
+      setEndoTest(null);
     }
   }, [tooth.id, tooth.perioData]);
 
@@ -297,6 +312,39 @@ const Tooth = ({ tooth, isSelected, onSelect, activeMode }) => {
               profundidadPalpacion={profundidadPalpacion}
               margenGingival={margenGingival}
             />
+            
+            {/* Mostrar imagen de furcación si está activa */}
+            {furcacion > 0 && (
+              <div className="furcation-overlay">
+                <img 
+                  src={`/images/teeth/furcacion/stage-${furcacion}.png`}
+                  alt={`Furcación etapa ${furcacion}`}
+                  className="furcation-overlay-image"
+                />
+              </div>
+            )}
+            
+            {/* Mostrar imagen de movilidad dental si está activa */}
+            {movilidad > 0 && (
+              <div className="mobility-overlay">
+                <img 
+                  src={`/images/teeth/movilidad dental/class ${movilidad}.png`}
+                  alt={`Movilidad clase ${movilidad}`}
+                  className="mobility-overlay-image"
+                />
+              </div>
+            )}
+            
+            {/* Mostrar imagen de test endodóntico si está activo */}
+            {endoTest && (
+              <div className="endo-test-overlay">
+                <img 
+                  src={`/images/teeth/endodoncia/${endoTest}.png`}
+                  alt={`Test ${endoTest}`}
+                  className="endo-test-overlay-image"
+                />
+              </div>
+            )}
           </>
         ) : (
           <div className="tooth-placeholder">
@@ -311,6 +359,11 @@ const Tooth = ({ tooth, isSelected, onSelect, activeMode }) => {
       {/* Indicadores para condiciones específicas */}
       {hasCondition('corona') && !tooth.isAbsent && <div className="crown-indicator"></div>}
       {hasCondition('endodoncia') && !tooth.isAbsent && <div className="endo-indicator"></div>}
+      
+      {/* Indicadores para datos periodontales */}
+      {furcacion > 0 && !tooth.isAbsent && <div className="furcation-indicator">{furcacion}</div>}
+      {movilidad > 0 && !tooth.isAbsent && <div className="mobility-indicator">{movilidad}</div>}
+      {endoTest && !tooth.isAbsent && <div className="endo-test-indicator">{endoTest.charAt(0).toUpperCase()}</div>}
       
       {/* Indicador visual para errores de carga */}
       {!imageLoaded && (

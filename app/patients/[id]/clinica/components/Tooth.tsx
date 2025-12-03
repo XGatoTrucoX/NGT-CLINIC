@@ -22,6 +22,13 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
   const [imageKey, setImageKey] = useState(Date.now());
   const [profundidadPalpacion, setProfundidadPalpacion] = useState(tooth.perioData?.profundidadPalpacion || 0);
   const [margenGingival, setMargenGingival] = useState(tooth.perioData?.margenGingival || 0);
+  const [furcacion, setFurcacion] = useState(tooth.perioData?.furcacion || 0);
+  const [movilidad, setMovilidad] = useState(tooth.perioData?.movilidad || 0);
+  const [endoTest, setEndoTest] = useState(tooth.perioData?.endoTest || []);
+  const [sangrado, setSangrado] = useState(tooth.perioData?.sangrado || false);
+  const [placa, setPlaca] = useState(tooth.perioData?.placa || false);
+  const [pus, setPus] = useState(tooth.perioData?.pus || false);
+  const [sarro, setSarro] = useState(tooth.perioData?.sarro || false);
   
   useEffect(() => {
     const handleEndoModeChange = (event: any) => {
@@ -43,6 +50,20 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
           setProfundidadPalpacion(value);
         } else if (type === 'margen') {
           setMargenGingival(value);
+        } else if (type === 'furcacion') {
+          setFurcacion(value);
+        } else if (type === 'movilidad') {
+          setMovilidad(value);
+        } else if (type === 'endoTest') {
+          setEndoTest(value);
+        } else if (type === 'sangrado') {
+          setSangrado(value);
+        } else if (type === 'placa') {
+          setPlaca(value);
+        } else if (type === 'pus') {
+          setPus(value);
+        } else if (type === 'sarro') {
+          setSarro(value);
         }
       }
     };
@@ -71,9 +92,19 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
     if (tooth.perioData) {
       setProfundidadPalpacion(tooth.perioData.profundidadPalpacion || 0);
       setMargenGingival(tooth.perioData.margenGingival || 0);
+      setFurcacion(tooth.perioData.furcacion || 0);
+      setMovilidad(tooth.perioData.movilidad || 0);
+      setEndoTest(tooth.perioData.endoTest || null);
     } else {
       setProfundidadPalpacion(0);
       setMargenGingival(0);
+      setFurcacion(0);
+      setMovilidad(0);
+      setEndoTest([]);
+      setSangrado(false);
+      setPlaca(false);
+      setPus(false);
+      setSarro(false);
     }
   }, [tooth.id, tooth.perioData]);
 
@@ -269,6 +300,10 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
               conditions={tooth.conditions || []}
               position={position}
             />
+            
+
+            
+
           </>
         ) : (
           <div className="tooth-placeholder">
@@ -281,6 +316,43 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
       
       {hasCondition('corona') && !tooth.isAbsent && <div className="crown-indicator"></div>}
       {hasCondition('endodoncia') && !tooth.isAbsent && <div className="endo-indicator"></div>}
+      
+      {/* Solo mostrar indicadores en vista buccal y modo perio */}
+      {position === 'buccal' && activeMode === 'perio' && (
+        <>
+          {/* Indicadores furcación y movilidad - lado izquierdo vertical */}
+          <div className="left-indicators-container">
+            {furcacion > 0 && !tooth.isAbsent && (
+              <div className="furcation-indicator">
+                <img src={`/images/teeth/furcacion/stage-${furcacion}.png`} alt={`F${furcacion}`} />
+              </div>
+            )}
+            {movilidad > 0 && !tooth.isAbsent && (
+              <div className="mobility-indicator">
+                <img src={`/images/teeth/movilidad dental/class ${movilidad}.png`} alt={`M${movilidad}`} />
+              </div>
+            )}
+          </div>
+          {/* Indicadores endodónticos - lado izquierdo */}
+          <div className="endo-indicators-container">
+            {Array.isArray(endoTest) && endoTest.map((test, index) => (
+              !tooth.isAbsent && (
+                <div key={index} className="endo-test-indicator">
+                  <img src={`/images/teeth/endodoncia/${test}.png`} alt={test} />
+                </div>
+              )
+            ))}
+          </div>
+          
+          {/* Indicadores periodontales - lado derecho */}
+          <div className="perio-indicators-container">
+            {sangrado && !tooth.isAbsent && <div className="perio-indicator sangrado-indicator">S</div>}
+            {placa && !tooth.isAbsent && <div className="perio-indicator placa-indicator">P</div>}
+            {pus && !tooth.isAbsent && <div className="perio-indicator pus-indicator">Pu</div>}
+            {sarro && !tooth.isAbsent && <div className="perio-indicator sarro-indicator">Sa</div>}
+          </div>
+        </>
+      )}
       
       {!imageLoaded && (
         <div className="image-error-indicator" style={{ 

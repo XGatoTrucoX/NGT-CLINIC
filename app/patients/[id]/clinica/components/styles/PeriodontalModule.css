@@ -1,176 +1,408 @@
 .periodontal-module {
-  width: 100%;
-  height: 100%;
+  padding: 20px;
   background-color: #2a3142;
   color: white;
-  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
   overflow-y: auto;
 }
 
-.perio-header {
-  margin-bottom: 20px;
-  border-bottom: 1px solid #4a5568;
-  padding-bottom: 15px;
-}
-
-.perio-header h3 {
-  margin: 0;
-  color: white;
+.panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
   font-size: 20px;
+  color: white;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #4a5568;
 }
 
-.perio-content {
+.palpacion-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.palpacion-btn .icon {
+  font-weight: bold;
+}
+
+.no-tooth-selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  color: #666;
+  font-size: 16px;
+}
+
+/* Estilos para la cuadrícula de mediciones periodontales */
+.perio-measurements-grid {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.perio-measurements {
-  background-color: #3a4152;
-  border-radius: 8px;
-  padding: 20px;
-}
-
-.perio-measurements h4 {
-  color: white;
-  margin-bottom: 20px;
-  font-size: 18px;
-  border-bottom: 1px solid #4a5568;
-  padding-bottom: 10px;
-}
-
-.measurement-group {
-  margin-bottom: 20px;
-}
-
-.measurement-group label {
-  display: block;
-  color: white;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-
-.measurement-inputs {
-  display: flex;
   gap: 15px;
+  margin-bottom: 30px;
 }
 
-.measurement-input {
+.perio-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.perio-cell {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.measurement-input label {
-  font-size: 12px;
-  color: #aaa;
-  margin-bottom: 5px;
-  text-transform: uppercase;
-}
-
-.measurement-input input {
-  width: 60px;
-  padding: 8px;
-  background-color: #2a3142;
+  padding: 15px 10px;
   border: 1px solid #4a5568;
-  border-radius: 4px;
-  color: white;
-  text-align: center;
-  font-size: 14px;
-}
-
-.measurement-input input:focus {
-  outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
-}
-
-.measurement-group select {
-  width: 100%;
-  padding: 10px;
-  background-color: #2a3142;
-  border: 1px solid #4a5568;
-  border-radius: 4px;
-  color: white;
-  font-size: 14px;
-}
-
-.measurement-group select:focus {
-  outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
-}
-
-.perio-indicators {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.perio-indicators label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: white;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  transition: all 0.2s ease;
+  background-color: #3a4152;
 }
 
-.perio-indicators input[type="checkbox"] {
+.perio-cell:hover {
+  border-color: #007bff;
+  background-color: #f0f7ff;
+}
+
+.perio-value {
+  font-size: 24px;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.perio-slider {
+  width: 100%;
+  height: 2px;
+  background-color: #eaeaea;
+  position: relative;
+  margin: 5px 0 10px 0;
+}
+
+.slider-circle {
   width: 18px;
   height: 18px;
-  accent-color: #4a90e2;
+  background-color: white;
+  border: 1px solid #007bff;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #007bff;
 }
 
-.perio-notes {
+.perio-label {
+  font-size: 12px;
+  color: #aaa;
+  text-align: center;
+}
+
+/* Estilos para secciones */
+.section {
+  margin-bottom: 30px;
+}
+
+.section h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: white;
+}
+
+/* Estilos para la cuadrícula de valores */
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  gap: 8px;
+}
+
+.value-grid button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
   background-color: #3a4152;
+  border: 1px solid #4a5568;
+  border-radius: 4px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.value-grid button:hover {
+  background-color: #e0e0e0;
+}
+
+.value-grid button.active {
+  background-color: #3498db;
+  color: white;
+  border-color: #2980b9;
+}
+
+/* Estilos para indicadores */
+.indicators-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #3a4152;
+  border: 1px solid #4a5568;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.indicator:hover {
+  background-color: #e0e0e0;
+}
+
+.indicator.active {
+  background-color: #f0f0f0;
+  border-color: #999;
+}
+
+.indicator-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.indicator-color.sangrado {
+  background-color: #e74c3c;
+}
+
+.indicator-color.placa {
+  background-color: #3498db;
+}
+
+.indicator-color.pus {
+  background-color: #f1c40f;
+}
+
+.indicator-color.sarro {
+  background-color: #95a5a6;
+}
+
+/* Estilos para furcación */
+.furcation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.furcation-grid button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background-color: #3a4152;
+  border: 1px solid #4a5568;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.furcation-grid button:hover {
+  background-color: #e0e0e0;
+}
+
+.furcation-grid button.active {
+  background-color: #f0f0f0;
+  border-color: #999;
+}
+
+.furcation-icon {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.furcation-image {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+/* Estilos para movilidad dental */
+.mobility-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.mobility-grid button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background-color: #3a4152;
+  border: 1px solid #4a5568;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobility-grid button:hover {
+  background-color: #e0e0e0;
+}
+
+.mobility-grid button.active {
+  background-color: #f0f0f0;
+  border-color: #999;
+}
+
+.mobility-icon {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.mobility-image {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+/* Estilos para tests endodónticos */
+.endo-tests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.endo-tests-grid button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px;
+  background-color: #3a4152;
+  border: 1px solid #4a5568;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 80px;
+}
+
+.endo-tests-grid button:hover {
+  background-color: #e0e0e0;
+}
+
+.endo-tests-grid button.active {
+  background-color: #e3f2fd;
+  border-color: #2196f3;
+  color: #1976d2;
+}
+
+.endo-test-image {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+.endo-tests-grid button span {
+  font-size: 12px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Estilos para panel detallado */
+.detail-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 500px;
+  background-color: white;
   border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.detail-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.detail-panel-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.detail-panel-content {
   padding: 20px;
 }
 
-.perio-notes h4 {
-  color: white;
-  margin-bottom: 15px;
-  font-size: 16px;
-}
-
-.notes-textarea {
-  width: 100%;
-  min-height: 80px;
-  background-color: #2a3142;
-  border: 1px solid #4a5568;
-  border-radius: 4px;
-  padding: 10px;
-  color: white;
-  font-family: inherit;
-  resize: vertical;
-  font-size: 14px;
-}
-
-.notes-textarea::placeholder {
-  color: #aaa;
-}
-
-.notes-textarea:focus {
-  outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
-}
-
-.save-notes-button {
-  background-color: #4a90e2;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-  width: 100%;
-  transition: all 0.3s ease;
-  font-size: 14px;
-}
-
-.save-notes-button:hover {
-  background-color: #357abd;
+/* Estilos responsivos para imágenes */
+@media (max-width: 768px) {
+  .furcation-image,
+  .mobility-image {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .endo-test-image {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .endo-tests-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+  
+  .endo-tests-grid button {
+    padding: 10px 5px;
+    min-height: 70px;
+  }
 }

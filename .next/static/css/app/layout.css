@@ -748,9 +748,6 @@ video {
 .max-h-32 {
   max-height: 8rem;
 }
-.max-h-\[80vh\] {
-  max-height: 80vh;
-}
 .min-h-0 {
   min-height: 0px;
 }
@@ -1345,10 +1342,6 @@ video {
 }
 .font-semibold {
   font-weight: 600;
-}
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 .text-blue-200 {
   --tw-text-opacity: 1;
