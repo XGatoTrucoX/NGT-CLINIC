@@ -174,3 +174,48 @@
 .save-notes-btn:hover {
   background-color: #357abd;
 }
+
+.perio-info {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #4a5568;
+}
+
+.perio-info h5 {
+  margin-bottom: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.indicators-info {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.indicator-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: white;
+}
+
+.indicator-badge.sangrado {
+  background-color: #e74c3c;
+}
+
+.indicator-badge.placa {
+  background-color: #3498db;
+}
+
+.indicator-badge.pus {
+  background-color: #f1c40f;
+  color: black;
+}
+
+.indicator-badge.sarro {
+  background-color: #95a5a6;
+}

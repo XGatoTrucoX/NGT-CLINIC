@@ -112,7 +112,7 @@ const OdontogramaApp: React.FC = () => {
   const renderContent = () => {
     switch (activeTab) {
       case 'general':
-        if (selectedTooth && activeMode !== 'quickselect') {
+        if (selectedTooth) {
           return (
             <div className="main-layout clean-detail-view">
               <div className="main-panel">
@@ -132,7 +132,7 @@ const OdontogramaApp: React.FC = () => {
               <div className={`left-panel ${!showRightPanel ? 'expanded' : ''}`}>
                 <div className="tooth-view-area">
                   <Odontograma 
-                    activeMode={activeMode} 
+                    activeMode="general" 
                     selectedTooth={selectedTooth} 
                     teethData={teethData} 
                     selectedTeeth={selectedTeeth}

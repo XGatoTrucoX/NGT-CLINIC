@@ -26,13 +26,58 @@ const ToothDetailView: React.FC<ToothDetailViewProps> = ({ selectedTooth, teethD
         </div>
         <div className="info-item">
           <label>Estado:</label>
-          <span>{tooth.isAbsent ? 'Ausente' : tooth.isImplant ? 'Implante' : 'Presente'}</span>
+          <span>{tooth.isAbsent ? 'Ausente' : tooth.isImplant ? 'Implante' : tooth.isPontic ? 'Puente' : tooth.hasCarilla ? 'Corona' : 'Presente'}</span>
         </div>
         <div className="info-item">
           <label>Tipo:</label>
           <span>{getToothType(tooth.id)}</span>
         </div>
       </div>
+      
+      {/* Datos Periodontales */}
+      {tooth.perioData && (
+        <div className="perio-info">
+          <h5>Datos Periodontales</h5>
+          <div className="info-grid">
+            {tooth.perioData.profundidadPalpacion > 0 && (
+              <div className="info-item">
+                <label>Profundidad Palpación:</label>
+                <span>{tooth.perioData.profundidadPalpacion} mm</span>
+              </div>
+            )}
+            {tooth.perioData.margenGingival !== 0 && (
+              <div className="info-item">
+                <label>Margen Gingival:</label>
+                <span>{tooth.perioData.margenGingival} mm</span>
+              </div>
+            )}
+            {tooth.perioData.furcacion > 0 && (
+              <div className="info-item">
+                <label>Furcación:</label>
+                <span>Etapa {tooth.perioData.furcacion}</span>
+              </div>
+            )}
+            {tooth.perioData.movilidad > 0 && (
+              <div className="info-item">
+                <label>Movilidad:</label>
+                <span>Clase {tooth.perioData.movilidad}</span>
+              </div>
+            )}
+            {tooth.perioData.endoTest && Array.isArray(tooth.perioData.endoTest) && tooth.perioData.endoTest.length > 0 && (
+              <div className="info-item">
+                <label>Tests Endodónticos:</label>
+                <span>{tooth.perioData.endoTest.join(', ')}</span>
+              </div>
+            )}
+            <div className="indicators-info">
+              {tooth.perioData.sangrado && <span className="indicator-badge sangrado">Sangrado</span>}
+              {tooth.perioData.placa && <span className="indicator-badge placa">Placa</span>}
+              {tooth.perioData.pus && <span className="indicator-badge pus">Pus</span>}
+              {tooth.perioData.sarro && <span className="indicator-badge sarro">Sarro</span>}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 
@@ -88,7 +133,7 @@ const ToothDetailView: React.FC<ToothDetailViewProps> = ({ selectedTooth, teethD
           className={`detail-tab ${activeDetailTab === 'general' ? 'active' : ''}`}
           onClick={() => setActiveDetailTab('general')}
         >
-          General
+          Resumen Completo
         </button>
         <button 
           className={`detail-tab ${activeDetailTab === 'treatments' ? 'active' : ''}`}
