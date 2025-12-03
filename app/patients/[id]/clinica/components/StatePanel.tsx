@@ -345,10 +345,10 @@ const StatePanel: React.FC<StatePanelProps> = ({
           const filteredConditions = existingConditions.filter((c: any) => c.type !== conditionType);
           
           const newState = {
-            isAbsent: false,
-            isImplant: false,
-            isPontic: false,
-            hasCarilla: false,
+            isAbsent: tooth?.isAbsent || false,
+            isImplant: tooth?.isImplant || false,
+            isPontic: tooth?.isPontic || false,
+            hasCarilla: tooth?.hasCarilla || false,
             conditions: [...filteredConditions, { type: conditionType, positions }]
           };
           onUpdateTooth(effectiveSelectedTooth!, newState);

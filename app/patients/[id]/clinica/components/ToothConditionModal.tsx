@@ -76,6 +76,10 @@ const ToothConditionModal: React.FC<ToothConditionModalProps> = ({
                 <img 
                   src={`/images/teeth/${view}/${view}.tooth.${imageToothId}.png`}
                   alt={`${view} view`}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = `/images/teeth/${view}/${view}.${imageToothId}.png`;
+                  }}
                 />
                 {positions
                   .filter(pos => pos.view === view)
