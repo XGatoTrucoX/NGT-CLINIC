@@ -32,7 +32,6 @@ const TabsNavigation: React.FC<TabsNavigationProps> = ({ activeTab, setActiveTab
           ))}
         </div>
         <div className="examination-label">
-          <span className="label-icon material-icons">medical_services</span>
           EXAMEN PERIODONTAL
         </div>
       </div>

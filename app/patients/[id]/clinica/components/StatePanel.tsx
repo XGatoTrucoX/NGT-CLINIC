@@ -77,34 +77,34 @@ const StatePanel: React.FC<StatePanelProps> = ({
       newState.conditions = [{ type: state }];
     }
     
-    onUpdateTooth(selectedTooth, newState);
+    onUpdateTooth(effectiveSelectedTooth!, newState);
     
     const stateName = state.charAt(0).toUpperCase() + state.slice(1);
     document.dispatchEvent(new CustomEvent('showConfirmation', {
-      detail: { message: `Estado ${stateName} aplicado al diente ${selectedTooth}` }
+      detail: { message: `Estado ${stateName} aplicado al diente ${effectiveSelectedTooth}` }
     }));
     
     setTimeout(() => {
-      const toothContainer = document.querySelector(`.tooth-container[data-tooth-id="${selectedTooth}"]`);
+      const toothContainer = document.querySelector(`.tooth-container[data-tooth-id="${effectiveSelectedTooth}"]`);
       if (toothContainer) {
         const img = toothContainer.querySelector('img');
         if (img) {
           const position = toothContainer.getAttribute('data-position') || 'buccal';
           
-          let imageToothId = selectedTooth;
+          let imageToothId = effectiveSelectedTooth;
           
-          if ((selectedTooth >= 21 && selectedTooth <= 28) || (selectedTooth >= 31 && selectedTooth <= 38)) {
-            if (selectedTooth >= 21 && selectedTooth <= 28) {
-              imageToothId = selectedTooth - 10;
-            } else if (selectedTooth >= 31 && selectedTooth <= 38) {
-              imageToothId = selectedTooth + 10;
+          if ((effectiveSelectedTooth >= 21 && effectiveSelectedTooth <= 28) || (effectiveSelectedTooth >= 31 && effectiveSelectedTooth <= 38)) {
+            if (effectiveSelectedTooth >= 21 && effectiveSelectedTooth <= 28) {
+              imageToothId = effectiveSelectedTooth - 10;
+            } else if (effectiveSelectedTooth >= 31 && effectiveSelectedTooth <= 38) {
+              imageToothId = effectiveSelectedTooth + 10;
             }
           }
           
           let newSrc = `/images/teeth/${position}/${position}.`;
           
           if (state === 'implante') {
-            newSrc += `implant.${imageToothId}.png`;
+            newSrc += position === 'incisal' ? `tooth.${imageToothId}.png` : `implant.${imageToothId}.png`;
           } else if (state === 'puente') {
             newSrc += position === 'incisal' ? `tooth.${imageToothId}.png` : `pontics.${imageToothId}.png`;
           } else if (state === 'desgaste') {
@@ -119,7 +119,16 @@ const StatePanel: React.FC<StatePanelProps> = ({
           
           newSrc += `?t=${new Date().getTime()}`;
           
-          console.log(`Actualizando imagen del diente ${selectedTooth} a estado ${state}. Nueva ruta:`, newSrc);
+          console.log(`Actualizando imagen del diente ${effectiveSelectedTooth} a estado ${state}. Nueva ruta:`, newSrc);
+          
+          // Manejar errores de carga de imagen
+          (img as HTMLImageElement).onerror = () => {
+            console.warn(`Error cargando imagen: ${newSrc}`);
+            // Fallback a imagen normal del diente
+            const fallbackSrc = `/images/teeth/${position}/${position}.tooth.${imageToothId}.png?t=${new Date().getTime()}`;
+            (img as HTMLImageElement).src = fallbackSrc;
+          };
+          
           (img as HTMLImageElement).src = newSrc;
           
           toothContainer.setAttribute('data-state', state === 'puente' ? 'pontic' : state);
@@ -129,7 +138,7 @@ const StatePanel: React.FC<StatePanelProps> = ({
       const otherToothImages = document.querySelectorAll('.tooth-image');
       otherToothImages.forEach(img => {
         const container = (img as HTMLElement).parentElement;
-        if (container && !container.matches(`.tooth-container[data-tooth-id="${selectedTooth}"]`)) {
+        if (container && !container.matches(`.tooth-container[data-tooth-id="${effectiveSelectedTooth}"]`)) {
           const currentSrc = (img as HTMLImageElement).src;
           if (currentSrc.includes('?')) {
             (img as HTMLImageElement).src = currentSrc.split('?')[0] + '?t=' + new Date().getTime();

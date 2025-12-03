@@ -275,15 +275,10 @@ const OdontogramaApp: React.FC = () => {
             </div>
             {showRightPanel && (
               <div className="right-panel">
-                <StatePanel 
-                  selectedTooth={selectedTooth} 
-                  selectedTeeth={selectedTeeth}
-                  setSelectedTeeth={setSelectedTeeth}
-                  teethData={teethData} 
-                  onUpdateTooth={handleUpdateTooth}
-                  onUpdateTeeth={handleUpdateTeeth}
-                  activeMode={activeMode}
-                />
+                <div className="endo-panel-placeholder">
+                  <h3>Módulo Endodóntico</h3>
+                  <p>Seleccione un diente para realizar pruebas endodónticas</p>
+                </div>
               </div>
             )}
           </div>

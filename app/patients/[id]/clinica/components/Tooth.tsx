@@ -157,7 +157,14 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
     let imagePath;
     
     if (tooth.isImplant) {
-      imagePath = `${basePath}${position}.implant.${imageToothId}.png${timestamp}`;
+      // Para vista incisal, usar imagen normal en lugar de implante
+      if (position === 'incisal') {
+        imagePath = `${basePath}${position}.tooth.${imageToothId}.png${timestamp}`;
+      } else {
+        // Si es diente 14, usar imagen de implante del 15
+        const implantToothId = imageToothId === 14 ? 15 : imageToothId;
+        imagePath = `${basePath}${position}.implant.${implantToothId}.png${timestamp}`;
+      }
       console.log('Generando ruta para implante:', imagePath);
     } else if (tooth.isPontic) {
       imagePath = position === 'incisal' ? `${basePath}${position}.tooth.${imageToothId}.png${timestamp}` : `${basePath}${position}.pontics.${imageToothId}.png${timestamp}`;
@@ -179,7 +186,12 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
       imagePath = `${basePath}${position}.tooth.${imageToothId}.png${timestamp}`;
     }
     
-    console.log('Ruta de imagen generada:', imagePath, 'Estado:', estado, 'ID original:', tooth.id, 'ID para imagen:', imageToothId);
+    console.log(`📸 IMAGEN GENERADA:`);
+    console.log(`   Diente: ${tooth.id} -> ID imagen: ${imageToothId}`);
+    console.log(`   Posición: ${position}`);
+    console.log(`   Estado: ${estado}`);
+    console.log(`   Ruta: ${imagePath}`);
+    console.log(`   Condiciones:`, tooth.conditions);
     return imagePath;
   };
   
@@ -215,31 +227,35 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
   
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const target = e.target as HTMLImageElement;
-    console.error(`Error al cargar imagen: ${target.src}`);
-    setImageLoaded(false);
-    
-    const srcUrl = target.src;
-    console.log('URL que falló:', srcUrl);
+    console.error(`🚨 ERROR CARGA IMAGEN:`);
+    console.error(`   Diente: ${tooth.id}`);
+    console.error(`   Posición: ${position}`);
+    console.error(`   URL que falló: ${target.src}`);
+    console.error(`   Estado diente:`, {
+      isImplant: tooth.isImplant,
+      isPontic: tooth.isPontic,
+      hasWear: tooth.hasWear,
+      hasCarilla: tooth.hasCarilla,
+      hasNecrosis: tooth.hasNecrosis,
+      hasLesionPeriapical: tooth.hasLesionPeriapical,
+      conditions: tooth.conditions
+    });
     
     let fallbackToothId = tooth.id;
-    
     if ((tooth.id >= 21 && tooth.id <= 28) || (tooth.id >= 31 && tooth.id <= 38)) {
       fallbackToothId = getMirrorToothId(tooth.id);
     }
     
-    const fallbackPath = `${basePath}${position}/${position}.tooth.${fallbackToothId}.png?t=${Date.now()}`;
-    console.log('Intentando con imagen alternativa:', fallbackPath);
-    target.src = fallbackPath;
+    // Usar el formato correcto que existe en la carpeta
+    const correctFallback = `/images/teeth/${position}/${position}.${fallbackToothId}.png?t=${Date.now()}`;
+    console.warn(`🔄 INTENTANDO FALLBACK CORRECTO: ${correctFallback}`);
     
-    console.warn(`Problema de carga de imagen para diente ${tooth.id} (usando ${fallbackToothId} como respaldo) con estado: ${
-      tooth.isImplant ? 'implante' : 
-      tooth.isPontic ? 'pontic' : 
-      tooth.hasWear ? 'desgaste' : 
-      tooth.hasCarilla ? 'carilla' : 
-      tooth.hasNecrosis ? 'necrosis' : 
-      tooth.hasLesionPeriapical ? 'lesion_periapical' : 
-      'normal'
-    }`);
+    target.onerror = () => {
+      console.error(`❌ FALLBACK CORRECTO FALLÓ, usando placeholder`);
+      setImageLoaded(false);
+    };
+    
+    target.src = correctFallback;
   };
   
   const handleImageLoad = () => {
