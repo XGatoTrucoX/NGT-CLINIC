@@ -14,7 +14,8 @@ const TabsNavigation: React.FC<TabsNavigationProps> = ({ activeTab, setActiveTab
     { id: 'general', label: 'General' },
     { id: 'quickselect', label: 'Selección Rápida' },
     { id: 'perio', label: 'Periodontal' },
-    { id: 'endo', label: 'Endodoncia' }
+    { id: 'endo', label: 'Endodoncia' },
+    { id: 'orto', label: 'Ortodoncia' }
   ];
 
   return (

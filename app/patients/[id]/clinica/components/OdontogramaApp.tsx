@@ -9,6 +9,7 @@ import QuickSelect from './QuickSelect';
 import ViewMenu from './ViewMenu';
 import EndodonticModule from './EndodonticModule';
 import PeriodontalModule from './PeriodontalModule';
+import OrtodonciaModule from './OrtodonciaModule';
 import Sidebar from './Sidebar';
 import ConfirmationMessage from './ConfirmationMessage';
 import DateTimeline from './DateTimeline';
@@ -249,6 +250,12 @@ const OdontogramaApp: React.FC = () => {
                 />
               </div>
             )}
+          </div>
+        );
+      case 'orto':
+        return (
+          <div className="main-layout">
+            <OrtodonciaModule teethData={teethData} />
           </div>
         );
       case 'endo':
