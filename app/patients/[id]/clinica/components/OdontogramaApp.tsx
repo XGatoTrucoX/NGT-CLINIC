@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './styles/OdontogramaApp.css';
 import TabsNavigation from './TabsNavigation';
 import Odontograma from './Odontograma';
@@ -10,6 +10,7 @@ import ViewMenu from './ViewMenu';
 import EndodonticModule from './EndodonticModule';
 import PeriodontalModule from './PeriodontalModule';
 import OrtodonciaModule from './OrtodonciaModule';
+import GingivalLine from './GingivalLine';
 import Sidebar from './Sidebar';
 import ConfirmationMessage from './ConfirmationMessage';
 import DateTimeline from './DateTimeline';
@@ -24,6 +25,7 @@ const OdontogramaApp: React.FC = () => {
   const [teethData, setTeethData] = useState(initialTeethData);
   const [selectedTeeth, setSelectedTeeth] = useState<number[]>([]);
   const [showRightPanel, setShowRightPanel] = useState(true);
+  const perioDentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleToothSelect = (event: any) => {
@@ -218,7 +220,7 @@ const OdontogramaApp: React.FC = () => {
         return (
           <div className="main-layout">
             <div className={`left-panel ${!showRightPanel ? 'expanded' : ''}`}>
-              <div className="tooth-view-area">
+              <div className="tooth-view-area" ref={perioDentRef} style={{ position: 'relative' }}>
                 <Odontograma 
                   activeMode="perio" 
                   selectedTooth={selectedTooth} 
@@ -227,6 +229,7 @@ const OdontogramaApp: React.FC = () => {
                   setSelectedTeeth={setSelectedTeeth}
                   setSelectedTooth={setSelectedTooth}
                 />
+                <GingivalLine containerRef={perioDentRef} activeMode={activeTab} />
               </div>
               <div className="view-menu-container">
                 <ViewMenu />

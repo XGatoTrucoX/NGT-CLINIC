@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './styles/PeriodontalModule.css';
 
 interface PeriodontalModuleProps {
@@ -19,7 +19,7 @@ const PeriodontalModule: React.FC<PeriodontalModuleProps> = ({ selectedTooth, te
   
   // Estados para profundidad de palpación y margen gingival
   const [profundidadPalpacion, setProfundidadPalpacion] = useState(0);
-  const [margenGingival, setMargenGingival] = useState(0);
+  // margenGingival ya no se usa como input manual — viene de la línea gingival
   
   // Estados para indicadores
   const [sangrado, setSangrado] = useState(false);
@@ -37,6 +37,32 @@ const PeriodontalModule: React.FC<PeriodontalModuleProps> = ({ selectedTooth, te
   // Estado para mostrar panel detallado
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [activeMeasurement, setActiveMeasurement] = useState<string | null>(null);
+  const [gingivalStatus, setGingivalStatus] = useState<{ label: string; color: string; delta?: number } | null>(null);
+  const selectedToothRef = useRef<number | null>(null);
+
+  useEffect(() => { selectedToothRef.current = selectedTooth; }, [selectedTooth]);
+
+  useEffect(() => {
+    const handler = (e: any) => {
+      // Aceptar el evento si coincide con el diente seleccionado actual (via ref para evitar stale)
+      if (e.detail.toothId === selectedToothRef.current) {
+        setGingivalStatus({ label: e.detail.label, color: e.detail.color, delta: e.detail.delta });
+      }
+    };
+    document.addEventListener('gingivalStatus', handler);
+    document.addEventListener('gingivalStatusUpdate', handler);
+    return () => {
+      document.removeEventListener('gingivalStatus', handler);
+      document.removeEventListener('gingivalStatusUpdate', handler);
+    };
+  }, []); // solo una vez, usa ref internamente
+
+  // Al cambiar diente, pedir el estado actual a GingivalLine
+  useEffect(() => {
+    if (!selectedTooth) { setGingivalStatus(null); return; }
+    // Disparar toothSelect para que GingivalLine emita el estado actual
+    document.dispatchEvent(new CustomEvent('toothSelect', { detail: { toothId: selectedTooth } }));
+  }, [selectedTooth]);
   
   // Resetear valores cuando cambia el diente seleccionado
   useEffect(() => {
@@ -47,7 +73,6 @@ const PeriodontalModule: React.FC<PeriodontalModuleProps> = ({ selectedTooth, te
     setBucal(0);
     setMesiobucal(0);
     setProfundidadPalpacion(0);
-    setMargenGingival(0);
     setSangrado(false);
     setPlaca(false);
     setPus(false);
@@ -82,42 +107,6 @@ const PeriodontalModule: React.FC<PeriodontalModuleProps> = ({ selectedTooth, te
       // Crear un objeto con los datos periodontales
       const perioData = {
         profundidadPalpacion: value,
-        // Mantener el valor actual de margen gingival
-        margenGingival: margenGingival,
-        furcacion: furcacion,
-        movilidad: movilidad,
-        endoTest: endoTest
-      };
-      
-      // Disparar un evento para que App.js actualice los datos del diente
-      document.dispatchEvent(new CustomEvent('updateToothPerioData', {
-        detail: {
-          toothId: selectedTooth,
-          perioData: perioData
-        }
-      }));
-    }
-  };
-  
-  // Función para establecer el valor del margen gingival
-  const handleSetMargen = (value: number) => {
-    setMargenGingival(value);
-    // Disparar evento para actualizar la visualización en el diente
-    document.dispatchEvent(new CustomEvent('perioMeasurementUpdate', {
-      detail: { 
-        toothId: selectedTooth,
-        type: 'margen',
-        value: value
-      }
-    }));
-    
-    // Actualizar los datos del diente para persistir los cambios
-    if (selectedTooth) {
-      // Crear un objeto con los datos periodontales
-      const perioData = {
-        // Mantener el valor actual de profundidad
-        profundidadPalpacion: profundidadPalpacion,
-        margenGingival: value,
         furcacion: furcacion,
         movilidad: movilidad,
         endoTest: endoTest
@@ -149,7 +138,6 @@ const PeriodontalModule: React.FC<PeriodontalModuleProps> = ({ selectedTooth, te
     if (selectedTooth) {
       const perioData = {
         profundidadPalpacion: profundidadPalpacion,
-        margenGingival: margenGingival,
         furcacion: value,
         movilidad: movilidad,
         endoTest: endoTest
@@ -167,20 +155,12 @@ const PeriodontalModule: React.FC<PeriodontalModuleProps> = ({ selectedTooth, te
   // Función para establecer el valor de movilidad
   const handleSetMovilidad = (value: number) => {
     setMovilidad(value);
-    // Disparar evento para actualizar la visualización en el diente
     document.dispatchEvent(new CustomEvent('perioMeasurementUpdate', {
-      detail: { 
-        toothId: selectedTooth,
-        type: 'movilidad',
-        value: value
-      }
+      detail: { toothId: selectedTooth, type: 'movilidad', value: value }
     }));
-    
-    // Actualizar los datos del diente para persistir los cambios
     if (selectedTooth) {
       const perioData = {
         profundidadPalpacion: profundidadPalpacion,
-        margenGingival: margenGingival,
         furcacion: furcacion,
         movilidad: value,
         endoTest: endoTest
@@ -214,7 +194,6 @@ const PeriodontalModule: React.FC<PeriodontalModuleProps> = ({ selectedTooth, te
     if (selectedTooth) {
       const perioData = {
         profundidadPalpacion: profundidadPalpacion,
-        margenGingival: margenGingival,
         furcacion: furcacion,
         movilidad: movilidad,
         endoTest: newTests
@@ -261,7 +240,6 @@ const PeriodontalModule: React.FC<PeriodontalModuleProps> = ({ selectedTooth, te
     if (selectedTooth) {
       const perioData = {
         profundidadPalpacion: profundidadPalpacion,
-        margenGingival: margenGingival,
         furcacion: furcacion,
         movilidad: movilidad,
         endoTest: endoTest,
@@ -306,6 +284,25 @@ const PeriodontalModule: React.FC<PeriodontalModuleProps> = ({ selectedTooth, te
           <span className="icon">+</span> PALPACIÓN
         </button>
       </div>
+
+      {/* Estado gingival */}
+      {gingivalStatus && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '0.5rem',
+          background: '#0f172a', borderRadius: '8px', padding: '0.5rem 0.75rem',
+          marginBottom: '1rem', border: `1px solid ${gingivalStatus.color}`
+        }}>
+          <span style={{
+            width: 10, height: 10, borderRadius: '50%',
+            background: gingivalStatus.color, flexShrink: 0,
+            boxShadow: `0 0 6px ${gingivalStatus.color}`
+          }} />
+          <span style={{ fontSize: '0.8rem', color: '#e2e8f0' }}>Estado encía:</span>
+          <strong style={{ fontSize: '0.85rem', color: gingivalStatus.color }}>
+            {gingivalStatus.label}
+          </strong>
+        </div>
+      )}
       
       {/* Mediciones principales con nuevo diseño */}
       <div className="perio-measurements-grid">
@@ -378,24 +375,62 @@ const PeriodontalModule: React.FC<PeriodontalModuleProps> = ({ selectedTooth, te
         </div>
       </div>
       
-      {/* Margen gingival */}
+      {/* Margen Gingival — tomado de la línea gingival */}
       <div className="section">
         <h3>MARGEN GINGIVAL</h3>
-        <div className="value-grid">
-          <button className={margenGingival === 0 ? 'active' : ''} onClick={() => handleSetMargen(0)}>0</button>
-          <button className={margenGingival === -1 ? 'active' : ''} onClick={() => handleSetMargen(-1)}>-1</button>
-          <button className={margenGingival === -2 ? 'active' : ''} onClick={() => handleSetMargen(-2)}>-2</button>
-          <button className={margenGingival === -3 ? 'active' : ''} onClick={() => handleSetMargen(-3)}>-3</button>
-          <button className={margenGingival === -4 ? 'active' : ''} onClick={() => handleSetMargen(-4)}>-4</button>
-          <button className={margenGingival === -5 ? 'active' : ''} onClick={() => handleSetMargen(-5)}>-5</button>
-          <button className={margenGingival === -6 ? 'active' : ''} onClick={() => handleSetMargen(-6)}>-6</button>
-          <button className={margenGingival === -7 ? 'active' : ''} onClick={() => handleSetMargen(-7)}>-7</button>
-          <button className={margenGingival === -8 ? 'active' : ''} onClick={() => handleSetMargen(-8)}>-8</button>
-          <button className={margenGingival === -9 ? 'active' : ''} onClick={() => handleSetMargen(-9)}>-9</button>
-          <button className={margenGingival === -10 ? 'active' : ''} onClick={() => handleSetMargen(-10)}>-10</button>
-          <button className={margenGingival === -11 ? 'active' : ''} onClick={() => handleSetMargen(-11)}>-11</button>
-          <button className={margenGingival === -12 ? 'active' : ''} onClick={() => handleSetMargen(-12)}>-12</button>
-        </div>
+        {gingivalStatus ? (
+          <div style={{
+            background: '#0f172a', borderRadius: '10px',
+            padding: '1rem', border: `2px solid ${gingivalStatus.color}`,
+            display: 'flex', flexDirection: 'column', gap: '0.6rem'
+          }}>
+            {/* Indicador visual */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <span style={{
+                width: 14, height: 14, borderRadius: '50%', flexShrink: 0,
+                background: gingivalStatus.color,
+                boxShadow: `0 0 8px ${gingivalStatus.color}`
+              }} />
+              <span style={{ fontSize: '1rem', fontWeight: 700, color: gingivalStatus.color }}>
+                {gingivalStatus.label}
+              </span>
+            </div>
+            {/* Descripción del estado */}
+            <p style={{ margin: 0, fontSize: '0.78rem', color: '#94a3b8', lineHeight: 1.5 }}>
+              {gingivalStatus.label === 'Encía retraída' &&
+                'La encía se ha retraído por encima del nivel normal. Se recomienda evaluación de recesión gingival.'}
+              {gingivalStatus.label === 'Hiperplasia gingival' &&
+                'La encía presenta un crecimiento excesivo por debajo del nivel normal. Puede requerir tratamiento.'}
+              {gingivalStatus.label === 'Normal' &&
+                'La encía se encuentra en posición normal. No se observan alteraciones significativas.'}
+            </p>
+            {/* Barra de desplazamiento visual */}
+            {gingivalStatus.delta !== undefined && (
+              <div style={{ marginTop: '0.25rem' }}>
+                <div style={{ fontSize: '0.7rem', color: '#64748b', marginBottom: '0.3rem' }}>
+                  Desplazamiento: {gingivalStatus.delta > 0 ? '+' : ''}{Math.round(gingivalStatus.delta)}px
+                </div>
+                <div style={{ height: 6, background: '#1e293b', borderRadius: 3, overflow: 'hidden' }}>
+                  <div style={{
+                    height: '100%', borderRadius: 3,
+                    background: gingivalStatus.color,
+                    width: `${Math.min(Math.abs(gingivalStatus.delta) / 40 * 100, 100)}%`,
+                    transition: 'width 0.3s'
+                  }} />
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div style={{
+            background: '#0f172a', borderRadius: '10px', padding: '1rem',
+            border: '1px solid #334155', textAlign: 'center'
+          }}>
+            <p style={{ margin: 0, fontSize: '0.8rem', color: '#475569' }}>
+              Selecciona el diente en el odontograma para ver el estado de la encía según la línea gingival
+            </p>
+          </div>
+        )}
       </div>
       
       {/* Indicadores */}
