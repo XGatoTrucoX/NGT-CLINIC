@@ -264,33 +264,10 @@ const OdontogramaApp: React.FC = () => {
       case 'endo':
         return (
           <div className="main-layout">
-            <div className={`left-panel ${!showRightPanel ? 'expanded' : ''}`}>
-              <EndodonticModule 
-                selectedTooth={selectedTooth}
-                teethData={teethData}
-              />
-              <div className="view-menu-container">
-                <ViewMenu />
-              </div>
-              <div className="sidebar-container">
-                <Sidebar activeMode={activeMode} setActiveMode={setActiveMode} />
-              </div>
-              <button 
-                className="toggle-panel-button"
-                onClick={() => setShowRightPanel(!showRightPanel)}
-                title={showRightPanel ? "Ocultar panel" : "Mostrar panel"}
-              >
-                {showRightPanel ? "❮" : "❯"}
-              </button>
-            </div>
-            {showRightPanel && (
-              <div className="right-panel">
-                <div className="endo-panel-placeholder">
-                  <h3>Módulo Endodóntico</h3>
-                  <p>Seleccione un diente para realizar pruebas endodónticas</p>
-                </div>
-              </div>
-            )}
+            <EndodonticModule 
+              selectedTooth={selectedTooth}
+              teethData={teethData}
+            />
           </div>
         );
       default:

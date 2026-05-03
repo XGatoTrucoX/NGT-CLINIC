@@ -503,32 +503,11 @@ const PeriodontalModule: React.FC<PeriodontalModuleProps> = ({ selectedTooth, te
         </div>
       </div>
       
-      {/* Tests Endodónticos */}
-      <div className="section">
+      {/* Tests Endodónticos — movidos al módulo de Endodoncia */}
+      {/* <div className="section">
         <h3>TESTS ENDODÓNTICOS</h3>
-        <div className="endo-tests-grid">
-          <button className={endoTest.includes('cold') ? 'active' : ''} onClick={() => handleSetEndoTest('cold')}>
-            <img src="/images/teeth/endodoncia/cold.png" alt="Frío" className="endo-test-image" />
-            <span>Frío</span>
-          </button>
-          <button className={endoTest.includes('heat') ? 'active' : ''} onClick={() => handleSetEndoTest('heat')}>
-            <img src="/images/teeth/endodoncia/heat.png" alt="Calor" className="endo-test-image" />
-            <span>Calor</span>
-          </button>
-          <button className={endoTest.includes('electricity') ? 'active' : ''} onClick={() => handleSetEndoTest('electricity')}>
-            <img src="/images/teeth/endodoncia/electricity.png" alt="Electricidad" className="endo-test-image" />
-            <span>Electricidad</span>
-          </button>
-          <button className={endoTest.includes('palpation') ? 'active' : ''} onClick={() => handleSetEndoTest('palpation')}>
-            <img src="/images/teeth/endodoncia/palpation.png" alt="Palpación" className="endo-test-image" />
-            <span>Palpación</span>
-          </button>
-          <button className={endoTest.includes('percussion') ? 'active' : ''} onClick={() => handleSetEndoTest('percussion')}>
-            <img src="/images/teeth/endodoncia/percussion.png" alt="Percusión" className="endo-test-image" />
-            <span>Percusión</span>
-          </button>
-        </div>
-      </div>
+        ...
+      </div> */}
     </div>
   );
 };

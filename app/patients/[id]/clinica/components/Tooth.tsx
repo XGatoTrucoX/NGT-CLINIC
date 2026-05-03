@@ -25,6 +25,8 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
   const [furcacion, setFurcacion] = useState(tooth.perioData?.furcacion || 0);
   const [movilidad, setMovilidad] = useState(tooth.perioData?.movilidad || 0);
   const [endoTest, setEndoTest] = useState(tooth.perioData?.endoTest || []);
+  // Niveles de tests endodónticos: { cold: 2, heat: 0, ... }
+  const [endoLevels, setEndoLevels] = useState<Record<string,number>>(tooth.perioData?.endoLevels || {});
   const [sangrado, setSangrado] = useState(tooth.perioData?.sangrado || false);
   const [placa, setPlaca] = useState(tooth.perioData?.placa || false);
   const [pus, setPus] = useState(tooth.perioData?.pus || false);
@@ -72,6 +74,17 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
     return () => {
       document.removeEventListener('perioMeasurementUpdate', handlePerioMeasurementUpdate);
     };
+  }, [tooth.id]);
+
+  // Escuchar niveles de tests endodónticos
+  useEffect(() => {
+    const handler = (e: any) => {
+      if (e.detail.toothId === tooth.id) {
+        setEndoLevels(prev => ({ ...prev, [e.detail.testId]: e.detail.level }));
+      }
+    };
+    document.addEventListener('endoTestLevel', handler);
+    return () => document.removeEventListener('endoTestLevel', handler);
   }, [tooth.id]);
   
   useEffect(() => {
@@ -333,6 +346,37 @@ const Tooth: React.FC<ToothProps> = ({ tooth, isSelected, onSelect, activeMode }
       {hasCondition('corona') && !tooth.isAbsent && <div className="crown-indicator"></div>}
       {hasCondition('endodoncia') && !tooth.isAbsent && <div className="endo-indicator"></div>}
       
+      {/* Indicadores en modo endo: icono + nivel sobre el diente */}
+      {position === 'buccal' && activeMode === 'endo' && (
+        <div style={{
+          position: 'absolute', top: 2, left: 0, right: 0,
+          display: 'flex', flexDirection: 'column', gap: 2,
+          alignItems: 'flex-start', padding: '0 3px', pointerEvents: 'none'
+        }}>
+          {(['cold','heat','electricity','percussion','palpation'] as const).map(testId => {
+            const level = endoLevels[testId];
+            if (!level || level === 0) return null;
+            return (
+              <div key={testId} style={{
+                display: 'flex', alignItems: 'center', gap: 3,
+                background: 'rgba(15,23,42,0.88)', borderRadius: 4,
+                padding: '2px 5px'
+              }}>
+                <img src={`/images/teeth/endodoncia/${testId}.png`} alt={testId}
+                  style={{ width: 18, height: 18, objectFit: 'contain' }}
+                  onError={e => { (e.target as HTMLImageElement).style.display='none'; }}
+                />
+                <span style={{
+                  fontSize: 13, fontWeight: 800, color:
+                    level <= 2 ? '#22c55e' : level === 3 ? '#f59e0b' : '#ef4444',
+                  lineHeight: 1
+                }}>{level}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
       {/* Solo mostrar indicadores en vista buccal y modo perio */}
       {position === 'buccal' && activeMode === 'perio' && (
         <>

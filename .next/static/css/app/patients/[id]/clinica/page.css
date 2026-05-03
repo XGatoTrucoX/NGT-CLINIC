@@ -1325,19 +1325,24 @@
 .endo-content {
   display: flex;
   height: calc(100vh - 200px);
+  transition: all 0.3s ease;
 }
 
 .endo-odontograma {
   flex: 1;
   padding: 20px;
+  transition: flex 0.3s ease;
+  min-width: 0;
 }
 
 .endo-panel {
   width: 350px;
+  min-width: 350px;
   background-color: #2a3142;
   padding: 20px;
   border-left: 1px solid #3a4152;
   overflow-y: auto;
+  transition: width 0.3s ease, min-width 0.3s ease, opacity 0.3s ease;
 }
 
 .endo-tests {
